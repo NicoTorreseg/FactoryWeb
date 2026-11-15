@@ -1,0 +1,217 @@
+{
+  "slug": "aurum-deco",
+  "templateType": "ecommerce",
+  "brand": {
+    "name": "Aurum Estudio & Deco",
+    "tagline": "Iluminación de autor y equipamiento nórdico directo de fábrica",
+    "heroHeadline": "Los mismos productos que ves en Mercado Libre, a precio directo de taller.",
+    "heroSubheadline": "Comprando en nuestra tienda oficial evitás el 18% de comisión de plataforma y accedés a 15% OFF adicional abonando por transferencia.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=80",
+    "logoText": "AURUM.",
+    "locationLabel": "Showroom Chacarita, CABA (Envíos a todo el país)",
+    "scheduleLabel": "Lun a Sáb 10:00 a 19:00 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@aurum.estudio",
+    "ratingScore": 4.9,
+    "reviewsCount": 640
+  },
+  "theme": {
+    "mode": "light",
+    "primaryColor": "#18181b",
+    "accentColor": "#d97706",
+    "borderRadius": "rounded"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "Mercado Libre",
+    "sellerBadge": "MercadoLíder Platinum · +2.500 ventas verificadas",
+    "commissionSavedPercent": 18,
+    "externalProfileUrl": "https://www.mercadolibre.com.ar"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491123456789",
+    "transferDiscountPercent": 15,
+    "mercadoPagoAlias": "aurum.deco.mp",
+    "freeShippingThreshold": 120000,
+    "flatShippingCost": 8500,
+    "installmentsText": "3 y 6 cuotas sin interés con Mercado Pago",
+    "deliveryTimeEstimate": "Despacho en 24 hs por Andreani / Moto CABA en el día"
+  },
+  "trustHighlights": [
+    {
+      "title": "Ahorro Directo 18% al 30%",
+      "subtitle": "Precios sin el recargo por comisión de Mercado Libre"
+    },
+    {
+      "title": "Reputación MercadoLíder",
+      "subtitle": "Más de 640 calificaciones positivas verificadas"
+    },
+    {
+      "title": "Envío Seguro a Todo el País",
+      "subtitle": "Embalaje reforzado con seguro de rotura incluido"
+    }
+  ],
+  "categories": [
+    { "id": "iluminacion", "name": "Lámparas & Iluminación", "badge": "Hot" },
+    { "id": "mesas", "name": "Mesas & Arrime" },
+    { "id": "textiles", "name": "Textiles & Alfombras" },
+    { "id": "objetos", "name": "Objetos de Autor" }
+  ],
+  "items": [
+    {
+      "id": "aur-01",
+      "sku": "LAMP-BAU-01",
+      "title": "Lámpara de Mesa Bauhaus Hongo Acero & Opalina",
+      "description": "Diseño icónico con base de acero cepillado y difusor de vidrio opalino soplado. Incluye lámpara LED cálida dimerizable y cable textil.",
+      "categoryId": "iluminacion",
+      "price": 89900,
+      "compareAtPlatformPrice": 109900,
+      "images": [
+        "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Más vendido en MeLi",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Despacho hoy",
+      "variants": [
+        {
+          "id": "acabado",
+          "name": "Acabado",
+          "options": [
+            { "label": "Acero Cepillado", "priceDelta": 0 },
+            { "label": "Bronce Mate", "priceDelta": 6500 },
+            { "label": "Negro Microtexturado", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aur-02",
+      "sku": "MESA-NORD-02",
+      "title": "Mesa Ratona Nórdica Roble Macizo & Hierro 110cm",
+      "description": "Tapa de madera de paraíso/roble estacionado de 35mm con hidrolaca satinada anti-manchas. Estructura de hierro estructural soldado sin costuras visibles.",
+      "categoryId": "mesas",
+      "price": 198000,
+      "compareAtPlatformPrice": 242000,
+      "images": [
+        "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Envío Gratis",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Últimas 2 en stock",
+      "variants": [
+        {
+          "id": "medida",
+          "name": "Medida",
+          "options": [
+            { "label": "110 x 60 cm", "priceDelta": 0 },
+            { "label": "130 x 70 cm", "priceDelta": 32000 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aur-03",
+      "sku": "COLG-LINO-03",
+      "title": "Colgante Campana Lino Rústico 60cm con Florón Metálico",
+      "description": "Pantalla tejida en lino natural lavado con estructura interna reforzada. Ideal para comedor o dormitorio principal.",
+      "categoryId": "iluminacion",
+      "price": 74500,
+      "compareAtPlatformPrice": 91000,
+      "images": [
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Stock inmediato",
+      "variants": [
+        {
+          "id": "color-lino",
+          "name": "Tono de Lino",
+          "options": [
+            { "label": "Crudo Natural", "priceDelta": 0 },
+            { "label": "Tostado Arena", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aur-04",
+      "sku": "ALF-YUTE-04",
+      "title": "Alfombra Tejida a Mano Yute & Algodón Crudo 160x230",
+      "description": "Trama artesanal de alto tránsito. Reverso antideslizante suave que no raya pisos de madera ni porcelanato.",
+      "categoryId": "textiles",
+      "price": 154000,
+      "compareAtPlatformPrice": 189000,
+      "images": [
+        "https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Envío Gratis",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Stock inmediato",
+      "variants": []
+    },
+    {
+      "id": "aur-05",
+      "sku": "ESP-ORG-05",
+      "title": "Espejo Orgánico Sin Marco Cristal Float 6mm 150x65cm",
+      "description": "Bordes pulidos con precisión CNC, listo para colgar en posición vertical u horizontal con kit de fijación oculto incluido.",
+      "categoryId": "objetos",
+      "price": 112000,
+      "compareAtPlatformPrice": 136500,
+      "images": [
+        "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Stock inmediato",
+      "variants": []
+    },
+    {
+      "id": "aur-06",
+      "sku": "VEL-PIE-06",
+      "title": "Lámpara de Pie Arco Minimalista Negro Mate LED Cálido",
+      "description": "Altura de 175 cm con cabezal orientable a 180 grados y pedal encendido de piso. Base pesada de mármol reconstituido.",
+      "categoryId": "iluminacion",
+      "price": 132000,
+      "compareAtPlatformPrice": 162000,
+      "images": [
+        "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "18% OFF vs MeLi",
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Últimas 4 unidades",
+      "variants": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-1",
+      "author": "Martina G.",
+      "rating": 5,
+      "text": "Los encontré por Mercado Libre y al entrar a su web me ahorré casi $45.000 en la mesa y la lámpara pagando por transferencia. Llegó en el día a Belgrano.",
+      "dateLabel": "Hace 3 días",
+      "source": "Web Directa"
+    },
+    {
+      "id": "rev-2",
+      "author": "Lucas F.",
+      "rating": 5,
+      "text": "Excelente calidad de terminación, tal cual las fotos. El embalaje con madera para el espejo al interior fue impecable.",
+      "dateLabel": "Hace 1 semana",
+      "source": "Mercado Libre"
+    },
+    {
+      "id": "rev-3",
+      "author": "Sofía R.",
+      "rating": 5,
+      "text": "Me asesoraron por WhatsApp con las medidas antes de comprar y el pedido ya les llegó cargado del carrito. Súper ágil.",
+      "dateLabel": "Hace 2 semanas",
+      "source": "Google Maps"
+    }
+  ]
+}

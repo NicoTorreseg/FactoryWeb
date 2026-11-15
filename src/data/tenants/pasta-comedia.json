@@ -1,0 +1,255 @@
+{
+  "slug": "pasta-comedia",
+  "templateType": "gastro",
+  "brand": {
+    "name": "Pasta Comedia Trattoria",
+    "tagline": "Pasta fresca fatta a mano & pizza napoletana a legna",
+    "heroHeadline": "Pizza napolitana *e pasta artesanal* hecha a mano.",
+    "heroSubheadline": "Entri come amici, vada come famiglia. Harinas italianas fermentadas 48 hs y salsa de tomates San Marzano.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80",
+    "logoText": "PASTA COMEDIA🎭",
+    "locationLabel": "Hipódromo Condesa · CDMX / Palermo, Buenos Aires",
+    "scheduleLabel": "Mar a Dom 12:30 a 23:30 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@pastacomedia.oficial",
+    "ratingScore": 4.9,
+    "reviewsCount": 420
+  },
+  "theme": {
+    "mode": "light",
+    "preset": "editorial",
+    "allowModeToggle": true,
+    "primaryColor": "#991b1b",
+    "accentColor": "#b45309",
+    "borderRadius": "sharp"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "PedidosYa / Rappi",
+    "sellerBadge": "4.9★ en Google Maps · Pasta artesanal del día",
+    "commissionSavedPercent": 25,
+    "externalProfileUrl": "https://maps.google.com"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491122334455",
+    "transferDiscountPercent": 15,
+    "mercadoPagoAlias": "pasta.comedia.mp",
+    "freeShippingThreshold": 35000,
+    "flatShippingCost": 2800,
+    "installmentsText": "15% OFF abonando por Transferencia o Efectivo",
+    "deliveryTimeEstimate": "Mesa con reserva o Delivery en 35-45 min"
+  },
+  "trustHighlights": [
+    {
+      "title": "Harina Italiana 00",
+      "subtitle": "Fermentación lenta de 48 horas en frío"
+    },
+    {
+      "title": "Pasta Fatta in Casa",
+      "subtitle": "Amasada cada mañana con sémola y huevos de campo"
+    },
+    {
+      "title": "Vinos con Maridaje",
+      "subtitle": "Selección curada de bodegas familiares"
+    }
+  ],
+  "categories": [
+    { "id": "pastas", "name": "Pasta Fresca & Tradizione", "badge": "Fatta a Mano" },
+    { "id": "pizzas", "name": "Pizza Napoletana a Legna" },
+    { "id": "vinos", "name": "Vinos & Coctelería de Autor", "badge": "Maridaje" },
+    { "id": "postres", "name": "Dolci Tradizionali" }
+  ],
+  "items": [
+    {
+      "id": "pas-01",
+      "sku": "PAS-TAG-TRUFA",
+      "title": "Tagliolini al Tartufo Nero & Parmigiano 24 Mesi",
+      "description": "Pasta fresca al huevo salteada en manteca de trufa negra de montaña, emulsión de caldo casero y lluvia abundante de Parmigiano Reggiano.",
+      "categoryId": "pastas",
+      "price": 18500,
+      "compareAtPlatformPrice": 24500,
+      "images": [
+        "https://images.unsplash.com/photo-1546549032-9571cd6b27df?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Recomendación del Chef",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Plato Insignia",
+      "variants": [
+        {
+          "id": "porcinis",
+          "name": "Adicionales",
+          "options": [
+            { "label": "Receta clásica", "priceDelta": 0 },
+            { "label": "+Hongos Porcini salteados", "priceDelta": 3900 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pas-02",
+      "sku": "PIZ-MARG-DOP",
+      "title": "Pizza Margherita Verace DOP San Marzano",
+      "description": "Masa fermentada 48 hs, mozzarella fior di latte fresca, tomate San Marzano triturado a mano, albahaca fresca y aceite de oliva virgen extra.",
+      "categoryId": "pizzas",
+      "price": 15800,
+      "compareAtPlatformPrice": 21000,
+      "images": [
+        "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Horno a 450°",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Disponible",
+      "variants": []
+    },
+    {
+      "id": "pas-03",
+      "sku": "PAS-RAV-OSSO",
+      "title": "Ravioloni Di Ossobuco en Reducción de Malbec & Romero",
+      "description": "Relleno braseado lentamente durante 6 horas al vino tinto y vegetales de estación, envueltos en masa fina de sémola.",
+      "categoryId": "pastas",
+      "price": 19200,
+      "compareAtPlatformPrice": 25500,
+      "images": [
+        "https://images.unsplash.com/photo-1587740896339-96a76170508d?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Disponible",
+      "variants": []
+    },
+    {
+      "id": "pas-04",
+      "sku": "VIN-NEGRONI",
+      "title": "Negroni Affumicato al Romero Quemado",
+      "description": "Campari, Gin artesanal macerado en botánicos y Vermut rosso de Torino infusionado con piel de naranja amarga y humo de romero.",
+      "categoryId": "vinos",
+      "price": 8900,
+      "compareAtPlatformPrice": 11800,
+      "images": [
+        "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Coctel de autor",
+      "variants": []
+    },
+    {
+      "id": "pas-05",
+      "sku": "VIN-CHIANTI",
+      "title": "Chianti Classico DOCG Riserva (Copa / Botella)",
+      "description": "Notas de guinda madura, violeta y toque especiado en roble. Maridaje perfecto para nuestras pastas con salsas oscuras.",
+      "categoryId": "vinos",
+      "price": 12500,
+      "compareAtPlatformPrice": 16000,
+      "images": [
+        "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Copa recomendada",
+      "variants": []
+    },
+    {
+      "id": "pas-06",
+      "sku": "DOL-TIRAMISU",
+      "title": "Tiramisù Tradizionale al Mascarpone & Espresso",
+      "description": "Vainillas savoiardi embebidas en café espresso fuerte y licor de café, crema suave de mascarpone italiano y cacao puro amargo.",
+      "categoryId": "postres",
+      "price": 7900,
+      "compareAtPlatformPrice": 10500,
+      "images": [
+        "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Elaboración diaria",
+      "variants": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "pc-rev-1",
+      "author": "Giuliana R.",
+      "rating": 5,
+      "text": "La mejor pasta al tartufo que probé fuera de Italia. Pedir por la web directa fue facilísimo y el descuento de transferencia se agradece un montón.",
+      "dateLabel": "Hace 2 días",
+      "source": "Web Directa"
+    },
+    {
+      "id": "pc-rev-2",
+      "author": "Mateo B.",
+      "rating": 5,
+      "text": "La masa de la pizza tiene una textura aireada impecable. La salsa San Marzano tiene el dulzor justo. Volveremos siempre.",
+      "dateLabel": "Hace 4 días",
+      "source": "Google Maps"
+    }
+  ],
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Hipódromo Condesa · Roma Norte · Trattoria",
+      "headline": "Pizza napolitana *e pasta artesanal* hecha a mano.",
+      "tagline": "Entri come amici, vada come famiglia.",
+      "imageUrl": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80",
+      "ctas": [
+        { "label": "Ver el Menú", "action": "catalog", "variant": "primary" },
+        { "label": "Reservar Mesa", "action": "whatsapp", "variant": "outline" }
+      ]
+    },
+    {
+      "type": "story",
+      "variant": "framed",
+      "eyebrow": "Nuestra Filosofía",
+      "headline": "Recetas que pasan *de mano en mano*, sin atajos.",
+      "body": [
+        "Amasamos pasta fresca allí mismo: las harinas italianas para napolitana con 48 horas de fermentación lenta, y el huevo con sémola italiana con más de un siglo de tradición en la región emiliana.",
+        "No creemos en las prisas. Son las recetas de quienes nos precedieron, respetando los métodos originales y buscando la calidez de sentarse a una mesa sin apuros."
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80",
+      "signature": "— Pasta Comedia, est. 2022"
+    },
+    {
+      "type": "menuList",
+      "id": "catalog",
+      "eyebrow": "Nuestra Carta Curada",
+      "title": "Pastas, Pizzas *& Vinos con Maridaje*"
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Tradición Diaria",
+      "title": "La cocina *en tres tiempos*",
+      "steps": [
+        {
+          "title": "Amasado Matutino",
+          "text": "Cada día a las 7:00 AM abrimos sacos de sémola de grano duro y huevos frescos de campo."
+        },
+        {
+          "title": "Fermentación Lenta",
+          "text": "Nuestras masas reposan un mínimo de 48 horas para lograr ligereza digestiva y borde inflado al horno."
+        },
+        {
+          "title": "Servicio Inmediato",
+          "text": "De la sartén de cobre o el horno de leña a 450° directo a tu mesa, sin esperas ni atajos."
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "eyebrow": "Memorias en Nuestra Mesa",
+      "title": "Lo que dicen nuestros *comensales*"
+    },
+    {
+      "type": "location",
+      "eyebrow": "Visítanos o Pide a Casa",
+      "title": "Un rincón italiano *en tu barrio*"
+    },
+    {
+      "type": "ctaBand",
+      "headline": "¿Querés reservar para un festejo o pedir a domicilio? *Escribinos*.",
+      "ctaLabel": "Hablar al WhatsApp del Local"
+    }
+  ]
+}

@@ -1,0 +1,343 @@
+{
+  "slug": "viothaniarg",
+  "templateType": "ecommerce",
+  "brand": {
+    "name": "Viothani Fermentos",
+    "tagline": "Cultivos vivos, probióticos naturales, Kéfir y Kombucha con asesoramiento personalizado",
+    "heroHeadline": "Tus cultivos vivos de siempre en Mercado Libre, ahora a precio directo de productor.",
+    "heroSubheadline": "Nódulos de Kéfir y SCOBY de Kombucha 100% frescos (nunca deshidratados), con guía paso a paso y soporte directo por WhatsApp. Comprando en nuestra web oficial ahorrás el 18% de comisión de plataforma + 10% OFF extra por transferencia.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=1400&q=80",
+    "logoText": "VIOTHANI🌱",
+    "locationLabel": "Retiro Pick-Up en Boedo, CABA · Envíos a todo el país",
+    "scheduleLabel": "Lun a Sáb 10:00 a 19:00 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@viothaniarg",
+    "ratingScore": 4.9,
+    "reviewsCount": 850
+  },
+  "theme": {
+    "mode": "light",
+    "preset": "editorial",
+    "allowModeToggle": true,
+    "primaryColor": "#3f5d3a",
+    "accentColor": "#b9692a",
+    "borderRadius": "sharp"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "Mercado Libre",
+    "sellerBadge": "Tienda Oficial VIOTHANIARG · +850 ventas de cultivos vivos",
+    "commissionSavedPercent": 18,
+    "externalProfileUrl": "https://www.mercadolibre.com.ar/pagina/viothaniarg"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491123456789",
+    "transferDiscountPercent": 10,
+    "mercadoPagoAlias": "viothani.fermentos.mp",
+    "freeShippingThreshold": 38000,
+    "flatShippingCost": 4900,
+    "installmentsText": "10% OFF extra por Transferencia o Efectivo al retirar en Boedo",
+    "deliveryTimeEstimate": "Retiro hoy en Boedo (CABA) o Despacho en 24hs a todo el país"
+  },
+  "trustHighlights": [
+    {
+      "title": "100% Cultivos Frescos Vivos",
+      "subtitle": "Alimentados con azúcar mascabo orgánico, nunca disecados ni congelados"
+    },
+    {
+      "title": "Ahorro Directo vs MeLi (-18%)",
+      "subtitle": "Sin los costos fijos ni comisiones por unidad de Mercado Libre"
+    },
+    {
+      "title": "Guía + Soporte por WhatsApp",
+      "subtitle": "Te acompañamos paso a paso en tu primera fermentación en casa"
+    }
+  ],
+  "categories": [
+    {
+      "id": "combos",
+      "name": "Kits & Combos Iniciadores",
+      "badge": "Ahorro"
+    },
+    {
+      "id": "kefir",
+      "name": "Nódulos de Kéfir (Agua y Leche)",
+      "badge": "Top"
+    },
+    {
+      "id": "kombucha",
+      "name": "SCOBY de Kombucha"
+    },
+    {
+      "id": "insumos",
+      "name": "Frascos & Insumos Orgánicos"
+    }
+  ],
+  "items": [
+    {
+      "id": "vio-01",
+      "sku": "VIO-KOM-STARTER",
+      "title": "Kit Starter Kombucha SCOBY Vivo + Té Iniciador Activo + Instructivo",
+      "description": "Disco de SCOBY fresco y vigoroso en su líquido iniciador ácido óptimo para evitar contaminaciones. Rinde hasta 3 litros por tanda y se reproduce en cada fermentación. Incluye manual PDF ilustrado y asesoramiento directo por WhatsApp.",
+      "categoryId": "kombucha",
+      "price": 13000,
+      "compareAtPlatformPrice": 15900,
+      "images": [
+        "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Más vendido en MeLi",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Cultivo fresco · Despacho hoy",
+      "variants": [
+        {
+          "id": "presentacion",
+          "name": "Tamaño de Cultivo",
+          "options": [
+            {
+              "label": "Estándar (Para frasco de 1.5L a 3L)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Doble SCOBY (Para 5L o 2 frascos)",
+              "priceDelta": 5200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vio-02",
+      "sku": "VIO-KEF-AGUA-30G",
+      "title": "Nódulos de Kéfir de Agua (Tíbicos Frescos) en Doypack Sellado + Guía",
+      "description": "Porción activa de nódulos de kéfir de agua cultivados con azúcar mascabo orgánico. Listos para preparar 1 litro diario de bebida probiótica gasificada natural libre de lácteos.",
+      "categoryId": "kefir",
+      "price": 12100,
+      "compareAtPlatformPrice": 14800,
+      "images": [
+        "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "#1 en Probióticos",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Stock fresco en Boedo",
+      "variants": [
+        {
+          "id": "gramaje",
+          "name": "Rendimiento",
+          "options": [
+            {
+              "label": "Porción para 1 Litro diario (30g)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Porción Familiar para 2 Litros (60g)",
+              "priceDelta": 4500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vio-03",
+      "sku": "VIO-KEF-LECHE",
+      "title": "Nódulos de Kéfir de Leche (Búlgaros Vivos) + Recetario Yogur & Queso Untable",
+      "description": "Cultivo vivo de alta actividad para fermentar leche entera o vegetal en 24 hs. Incluye guía para preparar kéfir cremoso tipo yogur griego y queso crema probiótico.",
+      "categoryId": "kefir",
+      "price": 12700,
+      "compareAtPlatformPrice": 15500,
+      "images": [
+        "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Con Guía Paso a Paso",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Disponible hoy",
+      "variants": []
+    },
+    {
+      "id": "vio-04",
+      "sku": "VIO-COMBO-DUO",
+      "title": "Combo Dúo Probiótico: SCOBY de Kombucha + Nódulos de Kéfir de Agua + Mascabo",
+      "description": "El pack más elegido para empezar en el mundo de la fermentación casera. Llevás ambos cultivos vivos en envases termosellados independientes + 500g de azúcar mascabo.",
+      "categoryId": "combos",
+      "price": 23600,
+      "compareAtPlatformPrice": 28900,
+      "images": [
+        "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Ahorrás $5.300 vs MeLi",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Envío en el día",
+      "variants": [
+        {
+          "id": "tipo-kefir",
+          "name": "Elegí tu variedad de Kéfir",
+          "options": [
+            {
+              "label": "Con Kéfir de Agua",
+              "priceDelta": 0
+            },
+            {
+              "label": "Con Kéfir de Leche",
+              "priceDelta": 500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vio-05",
+      "sku": "VIO-KIT-FRASCO-3L",
+      "title": "Kit Fermentación Continua: Frasco Vidrio 3L + Lienzo Respirable + Cultivo a Elección",
+      "description": "Todo listo para fermentar desde el primer día: frasco de vidrio ancho esterilizable, tela de lienzo con banda elástica, colador plástico (no oxida los nódulos) y cultivo vivo.",
+      "categoryId": "combos",
+      "price": 34300,
+      "compareAtPlatformPrice": 41900,
+      "images": [
+        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Envío Gratis",
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Últimos 4 kits",
+      "variants": [
+        {
+          "id": "cultivo-kit",
+          "name": "Cultivo Incluido",
+          "options": [
+            {
+              "label": "Incluir SCOBY Kombucha",
+              "priceDelta": 0
+            },
+            {
+              "label": "Incluir Kéfir de Agua",
+              "priceDelta": 0
+            },
+            {
+              "label": "Incluir Ambos Cultivos",
+              "priceDelta": 7500
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vio-06",
+      "sku": "VIO-INS-NUTRI",
+      "title": "Pack Nutrición de Cultivos: Azúcar Mascabo Orgánico 1kg + Té Negro en Hebras",
+      "description": "Alimento puro sin refinar y rico en minerales para que tus nódulos de kéfir y tu SCOBY se reproduzcan rápido y con máxima efervescencia.",
+      "categoryId": "insumos",
+      "price": 11000,
+      "compareAtPlatformPrice": 13500,
+      "images": [
+        "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Stock inmediato",
+      "variants": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "v-rev-1",
+      "author": "Valeria M.",
+      "rating": 5,
+      "text": "Les compré primero por Mercado Libre y después descubrí su tienda web directa. Los nódulos de kéfir vienen súper vivos y se duplicaron en la primera semana. La guía que te mandan por WhatsApp es clarísima.",
+      "dateLabel": "Hace 2 días",
+      "source": "Mercado Libre"
+    },
+    {
+      "id": "v-rev-2",
+      "author": "Hernán D.",
+      "rating": 5,
+      "text": "Retiré el kit de Kombucha por Boedo y me ahorré un montón pagando por transferencia. El SCOBY es enorme, nada que ver con los deshidratados que venden otros.",
+      "dateLabel": "Hace 5 días",
+      "source": "Web Directa"
+    },
+    {
+      "id": "v-rev-3",
+      "author": "Florencia S.",
+      "rating": 5,
+      "text": "Llegó perfecto al interior (Córdoba) en el doypack sellado. Al segundo día ya estaba fermentando a pleno. Súper recomendables por la paciencia para explicar.",
+      "dateLabel": "Hace 1 semana",
+      "source": "Mercado Libre"
+    }
+  ],
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Fermentos vivos · Boedo, CABA",
+      "headline": "Cultivos vivos para fermentar *en casa*, sin vueltas.",
+      "tagline": "Frescos, nunca deshidratados.",
+      "imageUrl": "https://images.unsplash.com/photo-1556881286-fc6915169721?auto=format&fit=crop&w=1600&q=80",
+      "ctas": [
+        {
+          "label": "Ver cultivos",
+          "action": "catalog",
+          "variant": "primary"
+        },
+        {
+          "label": "Escribinos",
+          "action": "whatsapp",
+          "variant": "outline"
+        }
+      ]
+    },
+    {
+      "type": "story",
+      "variant": "framed",
+      "eyebrow": "Cómo trabajamos",
+      "headline": "Fermentos que pasan *de mano en mano*, con guía incluida.",
+      "body": [
+        "Cada cultivo sale fresco y activo, en envase sellado y con instructivo. No vendemos discos deshidratados: preferimos que empieces con algo vivo.",
+        "Si en algún paso te trabás, nos escribís por WhatsApp y te acompañamos hasta que tu primera tanda salga bien."
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80",
+      "signature": "— Equipo Viothani, Boedo"
+    },
+    {
+      "type": "productGrid",
+      "id": "catalog",
+      "eyebrow": "Cultivos y kits",
+      "title": "Elegí tu *primer fermento*"
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Para empezar",
+      "title": "Tu primera tanda en *tres pasos*",
+      "steps": [
+        {
+          "title": "Recibís tu cultivo vivo",
+          "text": "Llega en envase sellado, con instructivo para activarlo desde el primer día."
+        },
+        {
+          "title": "Preparás tu primera tanda",
+          "text": "Con ingredientes simples y la guía paso a paso, sin equipamiento especial."
+        },
+        {
+          "title": "Fermentás y consultás",
+          "text": "Cualquier duda la resolvemos por WhatsApp mientras tu cultivo se activa."
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "eyebrow": "Opiniones",
+      "title": "Lo que cuentan quienes ya *fermentan*"
+    },
+    {
+      "type": "location",
+      "eyebrow": "Retiro y envíos",
+      "title": "Pasá por *Boedo* o te lo enviamos"
+    },
+    {
+      "type": "ctaBand",
+      "headline": "¿Dudas con tu primer cultivo? *Escribinos*.",
+      "ctaLabel": "Hablar por WhatsApp"
+    }
+  ]
+}

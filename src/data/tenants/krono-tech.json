@@ -1,0 +1,166 @@
+{
+  "slug": "krono-tech",
+  "templateType": "ecommerce",
+  "brand": {
+    "name": "Krono Tech & Audio",
+    "tagline": "Periféricos Pro, Audio Hi-Fi y Setup Workspace al mejor precio del país",
+    "heroHeadline": "Equipá tu setup sin pagar el sobreprecio de las plataformas.",
+    "heroSubheadline": "Somos MercadoLíder con más de 4.000 envíos. En nuestra tienda directa tenés precios hasta 20% más bajos que en nuestra publicación de MeLi y despacho Full en el día.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=1400&q=80",
+    "logoText": "KRONO//TECH",
+    "locationLabel": "Oficina Comercial Belgrano, CABA (Retiro Pick-Up y Envíos)",
+    "scheduleLabel": "Lun a Vie 9:30 a 18:30 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@kronotech.ar",
+    "ratingScore": 4.9,
+    "reviewsCount": 1420
+  },
+  "theme": {
+    "mode": "dark",
+    "primaryColor": "#6366f1",
+    "accentColor": "#10b981",
+    "borderRadius": "rounded"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "Mercado Libre",
+    "sellerBadge": "MercadoLíder Platinum · +4.000 ventas · Factura A y B",
+    "commissionSavedPercent": 19,
+    "externalProfileUrl": "https://www.mercadolibre.com.ar"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491198765432",
+    "transferDiscountPercent": 10,
+    "mercadoPagoAlias": "krono.tech.ar",
+    "freeShippingThreshold": 95000,
+    "flatShippingCost": 6900,
+    "installmentsText": "Hasta 6 cuotas fijas con Mercado Pago · Factura A/B",
+    "deliveryTimeEstimate": "Envío Flex en el día (CABA/GBA) · Correo Argentino a todo el país"
+  },
+  "trustHighlights": [
+    {
+      "title": "Garantía Oficial 12 Meses",
+      "subtitle": "Cajas selladas de fábrica con número de serie verificable"
+    },
+    {
+      "title": "Hasta 20% Menos que en MeLi",
+      "subtitle": "Descontamos íntegramente la comisión del marketplace"
+    },
+    {
+      "title": "Envío Flex en el Día",
+      "subtitle": "Comprando antes de las 14 hs te llega hoy mismo en AMBA"
+    }
+  ],
+  "categories": [
+    { "id": "teclados", "name": "Teclados Mecánicos", "badge": "Top" },
+    { "id": "audio", "name": "Audio & Auriculares" },
+    { "id": "ergonomia", "name": "Soportes & Ergonomía" },
+    { "id": "mouse", "name": "Mice & Pads" }
+  ],
+  "items": [
+    {
+      "id": "kro-01",
+      "sku": "KEY-K8-PRO",
+      "title": "Teclado Mecánico Inalámbrico Keychron K8 Pro QMK/VIA Aluminio",
+      "description": "Conexión triple Bluetooth 5.1 / USB-C, hot-swappable con switches Gateron Pro lubricados de fábrica y espuma acústica de silicona integrada.",
+      "categoryId": "teclados",
+      "price": 179000,
+      "compareAtPlatformPrice": 219000,
+      "images": [
+        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "#1 Más vendido",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "En stock · Envío Hoy",
+      "variants": [
+        {
+          "id": "switch",
+          "name": "Tipo de Switch",
+          "options": [
+            { "label": "Gateron Red (Lineal Silencioso)", "priceDelta": 0 },
+            { "label": "Gateron Brown (Táctil)", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kro-02",
+      "sku": "AUD-XM5-BLK",
+      "title": "Auriculares Inalámbricos Noise Cancelling Studio Hi-Res ANC",
+      "description": "Cancelación activa de ruido con 8 micrófonos, 36 horas de batería continua, carga rápida USB-C y estuche rígido de viaje.",
+      "categoryId": "audio",
+      "price": 245000,
+      "compareAtPlatformPrice": 298000,
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Ahorrás $53.000",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Últimas 3 unidades",
+      "variants": [
+        {
+          "id": "color",
+          "name": "Color",
+          "options": [
+            { "label": "Negro Carbón", "priceDelta": 0 },
+            { "label": "Plata Platino", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kro-03",
+      "sku": "ARM-DUAL-GAS",
+      "title": "Brazo Hidráulico Doble Pistón a Gas para Monitores 17 a 34 Pulgadas",
+      "description": "Soporta hasta 10 kg por brazo, estándar VESA 75x75 y 100x100 con organizador de cables oculto y doble prensa de escritorio.",
+      "categoryId": "ergonomia",
+      "price": 76900,
+      "compareAtPlatformPrice": 94900,
+      "images": [
+        "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Stock inmediato",
+      "variants": []
+    },
+    {
+      "id": "kro-04",
+      "sku": "MOU-SUPERLIGHT",
+      "title": "Mouse Inalámbrico Ultraliviano 58g Sensor Óptico 26.000 DPI",
+      "description": "Switches ópticos de 90M de clics, skates 100% PTFE puro y receptor inalámbrico de baja latencia 1000Hz.",
+      "categoryId": "mouse",
+      "price": 114000,
+      "compareAtPlatformPrice": 139000,
+      "images": [
+        "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Envío Gratis",
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "En stock",
+      "variants": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "k-rev-1",
+      "author": "Nicolás P. (Dev)",
+      "rating": 5,
+      "text": "Estaba por comprarles el Keychron en Mercado Libre a $219k y vi que en su tienda web oficial salía $179k + 10% menos por transferencia. Me llegó en moto a las 3 horas.",
+      "dateLabel": "Hace 2 días",
+      "source": "Web Directa"
+    },
+    {
+      "id": "k-rev-2",
+      "author": "Agustín M.",
+      "rating": 5,
+      "text": "Emitieron Factura A en el acto y el brazo hidráulico es una roca. Excelente atención por WhatsApp.",
+      "dateLabel": "Hace 5 días",
+      "source": "Mercado Libre"
+    }
+  ]
+}

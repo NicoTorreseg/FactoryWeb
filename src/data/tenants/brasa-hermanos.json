@@ -1,0 +1,167 @@
+{
+  "slug": "brasa-hermanos",
+  "templateType": "gastro",
+  "brand": {
+    "name": "Brasa Hermanos Smash & Beer",
+    "tagline": "Smash burgers de blend ojo de bife, pan de papa propio y papas triple cocción",
+    "heroHeadline": "Pedí directo a nuestra cocina: más rápido, recién salido de la plancha y a precio de mostrador.",
+    "heroSubheadline": "Sin el 30% de sobreprecio de las apps de delivery. Armá tu pedido en 30 segundos y recibilo en caliente con nuestra propia moto.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1400&q=80",
+    "logoText": "BRASA HNOS🔥",
+    "locationLabel": "Av. Pedro Goyena 1420, Caballito",
+    "scheduleLabel": "Mar a Dom 19:00 a 00:30 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@brasahermanos.ba",
+    "ratingScore": 4.8,
+    "reviewsCount": 910
+  },
+  "theme": {
+    "mode": "dark",
+    "primaryColor": "#f97316",
+    "accentColor": "#eab308",
+    "borderRadius": "rounded"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "PedidosYa / Rappi",
+    "sellerBadge": "4.8★ en Google Maps · +900 reseñas verificadas",
+    "commissionSavedPercent": 25,
+    "externalProfileUrl": "https://maps.google.com"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491144556677",
+    "transferDiscountPercent": 10,
+    "mercadoPagoAlias": "brasa.hermanos.mp",
+    "freeShippingThreshold": 28000,
+    "flatShippingCost": 2200,
+    "installmentsText": "10% OFF adicional en Efectivo o Transferencia",
+    "deliveryTimeEstimate": "Entrega en 25 - 35 min con moto propia"
+  },
+  "trustHighlights": [
+    {
+      "title": "Precio de Mostrador (-25%)",
+      "subtitle": "Mucho más barato que pedirnos por apps de delivery"
+    },
+    {
+      "title": "Moto Propia sin Escalas",
+      "subtitle": "Sale de la plancha directo a tu puerta sin pasear por el barrio"
+    },
+    {
+      "title": "Papas gratis en tu 1er Pedido Web",
+      "subtitle": "Todas las burgers incluyen porción grande de papas triple cocción"
+    }
+  ],
+  "categories": [
+    { "id": "combos", "name": "Combos Para Compartir", "badge": "Ahorro" },
+    { "id": "smash", "name": "Smash Burgers" },
+    { "id": "sides", "name": "Papas & Entradas" },
+    { "id": "bebidas", "name": "Birras & Bebidas" }
+  ],
+  "items": [
+    {
+      "id": "bra-01",
+      "sku": "COMBO-DOBLE-2",
+      "title": "Combo 2x Oklahoma Doble Smash + Bandeja de Papas Cheddar & Bacon",
+      "description": "Dos burgers dobles (4 medallones smash de 90g con cebolla finita en plancha y cuádruple cheddar Milkaut) + bandeja grande de papas con cheddar fundido y panceta crocante.",
+      "categoryId": "combos",
+      "price": 24900,
+      "compareAtPlatformPrice": 32500,
+      "images": [
+        "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Más pedido hoy",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Sale en 15 min",
+      "variants": [
+        {
+          "id": "bebida-combo",
+          "name": "Sumar Bebidas al Combo",
+          "options": [
+            { "label": "Sin bebida", "priceDelta": 0 },
+            { "label": "+2 Latas Coca-Cola 354ml", "priceDelta": 4200 },
+            { "label": "+2 Latas Patagonia Amber Lager 473ml", "priceDelta": 6800 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bra-02",
+      "sku": "BURG-TRIPLE-BACON",
+      "title": "Triple Crispy Bacon & Relish Ahumado (Con Papas)",
+      "description": "Tres medallones de ojo de bife smasheados con costra crocante, 6 fetas de cheddar americano, panceta ahumada a leña y salsa Brasa secreta en pan de papa dorado en manteca.",
+      "categoryId": "smash",
+      "price": 13900,
+      "compareAtPlatformPrice": 17900,
+      "images": [
+        "https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Best Seller",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Disponible",
+      "variants": [
+        {
+          "id": "extras",
+          "name": "Extras en tu Burger",
+          "options": [
+            { "label": "Clásica", "priceDelta": 0 },
+            { "label": "+Extra Medallón y Cheddar", "priceDelta": 2900 },
+            { "label": "+Pote de Cheddar Líquido aparte", "priceDelta": 2400 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bra-03",
+      "sku": "BURG-TRUFADA",
+      "title": "Doble Provoleta Grillada, Hongos & Mayo de Ajo Asado",
+      "description": "Doble smash de 90g, provoleta estacionada dorada a la plancha, portobellos salteados en manteca de hierbas y alioli suave.",
+      "categoryId": "smash",
+      "price": 13400,
+      "compareAtPlatformPrice": 17200,
+      "images": [
+        "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Disponible",
+      "variants": []
+    },
+    {
+      "id": "bra-04",
+      "sku": "SIDE-TEQUENOS",
+      "title": "Bastones de Muzzarella Rebozados en Panko x6 + Dip Pomodoro",
+      "description": "Crujientes por fuera, corazón de muzzarella hilada con salsa de tomates asados casera.",
+      "categoryId": "sides",
+      "price": 8200,
+      "compareAtPlatformPrice": 10600,
+      "images": [
+        "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=900&q=80"
+      ],
+      "featured": false,
+      "inStock": true,
+      "stockLabel": "Disponible",
+      "variants": []
+    }
+  ],
+  "reviews": [
+    {
+      "id": "b-rev-1",
+      "author": "Tomás L.",
+      "rating": 5,
+      "text": "En PedidosYa el mismo combo para dos nos salía $32.500 más cargo de servicio. Pidiendo por acá nos salió $22.400 con transferencia y llegó hirviendo.",
+      "dateLabel": "Ayer",
+      "source": "Web Directa"
+    },
+    {
+      "id": "b-rev-2",
+      "author": "Camila V.",
+      "rating": 5,
+      "text": "La mejor smash de Caballito lejos. La página para armar el pedido y mandarlo al WhatsApp es comodísima.",
+      "dateLabel": "Hace 4 días",
+      "source": "Google Maps"
+    }
+  ]
+}

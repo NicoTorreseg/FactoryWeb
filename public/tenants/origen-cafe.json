@@ -62,18 +62,15 @@
   "categories": [
     {
       "id": "origenes-unicos",
-      "name": "Orígenes Únicos (Single Origin)",
-      "description": "Lotes de fincas de altura seleccionadas"
+      "name": "Orígenes Únicos (Single Origin)"
     },
     {
       "id": "blends-espresso",
-      "name": "Blends de la Casa",
-      "description": "Equilibrio perfecto de dulzura, cuerpo y crema"
+      "name": "Blends de la Casa"
     },
     {
       "id": "packs-degustacion",
-      "name": "Packs & Degustación",
-      "description": "Combos para explorar diferentes perfiles sensoriales"
+      "name": "Packs & Degustación"
     }
   ],
   "items": [
@@ -95,8 +92,8 @@
       "stockLabel": "Tostado ayer · 18 bolsas listas",
       "variants": [
         {
+          "id": "vg-molienda",
           "name": "Tipo de Molienda",
-          "required": true,
           "options": [
             { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
             { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
@@ -105,8 +102,8 @@
           ]
         },
         {
+          "id": "vg-tamano",
           "name": "Presentación",
-          "required": false,
           "options": [
             { "label": "Bolsa 250g con Válvula Degasificadora", "priceDelta": 0 },
             { "label": "Bolsa 500g (+ Ahorro)", "priceDelta": 16000 },
@@ -132,8 +129,8 @@
       "stockLabel": "En stock",
       "variants": [
         {
+          "id": "vg-molienda",
           "name": "Tipo de Molienda",
-          "required": true,
           "options": [
             { "label": "En Grano Entero", "priceDelta": 0 },
             { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
@@ -160,8 +157,8 @@
       "stockLabel": "Últimas 12 bolsas",
       "variants": [
         {
+          "id": "vg-molienda",
           "name": "Tipo de Molienda",
-          "required": true,
           "options": [
             { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
             { "label": "Molido Filtro / V60 / Kalita (Medio)", "priceDelta": 0 },
@@ -188,8 +185,8 @@
       "stockLabel": "En stock",
       "variants": [
         {
+          "id": "vg-molienda",
           "name": "Tipo de Molienda",
-          "required": true,
           "options": [
             { "label": "En Grano Entero", "priceDelta": 0 },
             { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
@@ -216,8 +213,8 @@
       "stockLabel": "En stock",
       "variants": [
         {
+          "id": "vg-molienda",
           "name": "Tipo de Molienda del Pack",
-          "required": true,
           "options": [
             { "label": "Todos en Grano Entero", "priceDelta": 0 },
             { "label": "Todos Molidos para Filtro / V60", "priceDelta": 0 },
@@ -233,7 +230,7 @@
       "id": "rev-1",
       "author": "Matías S.",
       "rating": 5,
-      "comment": "El café de Colombia Huila tostado la semana pasada es una locura. Notas cítricas y aroma que llena toda la cocina al molerlo. Compraba siempre por MeLi pero por acá retiro en Colegiales y me ahorré más de $8.000 con el descuento por transferencia.",
+      "text": "El café de Colombia Huila tostado la semana pasada es una locura. Notas cítricas y aroma que llena toda la cocina al molerlo. Compraba siempre por MeLi pero por acá retiro en Colegiales y me ahorré más de $8.000 con el descuento por transferencia.",
       "dateLabel": "Hace 3 días",
       "source": "Mercado Libre"
     },
@@ -241,7 +238,7 @@
       "id": "rev-2",
       "author": "Florencia G.",
       "rating": 5,
-      "comment": "Excelente el Blend Barista para la cafetera espresso de casa. La molienda fina vino perfecta y el paquete con válvula mantiene el grano fresco un mes entero. Muy recomendables.",
+      "text": "Excelente el Blend Barista para la cafetera espresso de casa. La molienda fina vino perfecta y el paquete con válvula mantiene el grano fresco un mes entero. Muy recomendables.",
       "dateLabel": "Hace 1 semana",
       "source": "Mercado Libre"
     },
@@ -249,7 +246,7 @@
       "id": "rev-3",
       "author": "Esteban R.",
       "rating": 5,
-      "comment": "Atención impecable por WhatsApp para elegir el café adecuado para mi V60. El Trío Degustación es ideal para regalar o para ir probando distintos perfiles.",
+      "text": "Atención impecable por WhatsApp para elegir el café adecuado para mi V60. El Trío Degustación es ideal para regalar o para ir probando distintos perfiles.",
       "dateLabel": "Hace 2 semanas",
       "source": "Mercado Libre"
     }
@@ -280,7 +277,7 @@
       "signature": "— Tostadores & Baristas, Origen Colegiales"
     },
     {
-      "type": "product_grid",
+      "type": "productGrid",
       "id": "catalog",
       "eyebrow": "Orígenes & Blends",
       "title": "Elegí tu *café de la semana*"
@@ -315,7 +312,7 @@
       "title": "Pasá por nuestra *tostaduría* o te lo enviamos"
     },
     {
-      "type": "cta_band",
+      "type": "ctaBand",
       "headline": "¿No sabés qué café elegir para tu cafetera? *Escribinos*.",
       "ctaLabel": "Asesoramiento por WhatsApp"
     }

@@ -95,19 +95,40 @@
           "id": "vg-molienda",
           "name": "Tipo de Molienda",
           "options": [
-            { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
-            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
-            { "label": "Molido Filtro / V60 / Cafetera (Medio)", "priceDelta": 0 },
-            { "label": "Molido Prensa Francesa / Cold Brew (Grueso)", "priceDelta": 0 }
+            {
+              "label": "En Grano Entero (Recomendado)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Espresso (Fino)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Filtro / V60 / Cafetera (Medio)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Prensa Francesa / Cold Brew (Grueso)",
+              "priceDelta": 0
+            }
           ]
         },
         {
           "id": "vg-tamano",
           "name": "Presentación",
           "options": [
-            { "label": "Bolsa 250g con Válvula Degasificadora", "priceDelta": 0 },
-            { "label": "Bolsa 500g (+ Ahorro)", "priceDelta": 16000 },
-            { "label": "Bolsa 1 kg Familiar / Barista", "priceDelta": 42000 }
+            {
+              "label": "Bolsa 250g con Válvula Degasificadora",
+              "priceDelta": 0
+            },
+            {
+              "label": "Bolsa 500g (+ Ahorro)",
+              "priceDelta": 16000
+            },
+            {
+              "label": "Bolsa 1 kg Familiar / Barista",
+              "priceDelta": 42000
+            }
           ]
         }
       ]
@@ -132,10 +153,22 @@
           "id": "vg-molienda",
           "name": "Tipo de Molienda",
           "options": [
-            { "label": "En Grano Entero", "priceDelta": 0 },
-            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
-            { "label": "Molido Filtro / V60 (Medio)", "priceDelta": 0 },
-            { "label": "Molido Prensa Francesa (Grueso)", "priceDelta": 0 }
+            {
+              "label": "En Grano Entero",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Espresso (Fino)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Filtro / V60 (Medio)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Prensa Francesa (Grueso)",
+              "priceDelta": 0
+            }
           ]
         }
       ]
@@ -160,10 +193,22 @@
           "id": "vg-molienda",
           "name": "Tipo de Molienda",
           "options": [
-            { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
-            { "label": "Molido Filtro / V60 / Kalita (Medio)", "priceDelta": 0 },
-            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
-            { "label": "Molido Prensa Francesa (Grueso)", "priceDelta": 0 }
+            {
+              "label": "En Grano Entero (Recomendado)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Filtro / V60 / Kalita (Medio)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Espresso (Fino)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Prensa Francesa (Grueso)",
+              "priceDelta": 0
+            }
           ]
         }
       ]
@@ -188,10 +233,22 @@
           "id": "vg-molienda",
           "name": "Tipo de Molienda",
           "options": [
-            { "label": "En Grano Entero", "priceDelta": 0 },
-            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
-            { "label": "Molido Cafetera Moka / Italiana", "priceDelta": 0 },
-            { "label": "Molido Filtro (Medio)", "priceDelta": 0 }
+            {
+              "label": "En Grano Entero",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Espresso (Fino)",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Cafetera Moka / Italiana",
+              "priceDelta": 0
+            },
+            {
+              "label": "Molido Filtro (Medio)",
+              "priceDelta": 0
+            }
           ]
         }
       ]
@@ -216,10 +273,22 @@
           "id": "vg-molienda",
           "name": "Tipo de Molienda del Pack",
           "options": [
-            { "label": "Todos en Grano Entero", "priceDelta": 0 },
-            { "label": "Todos Molidos para Filtro / V60", "priceDelta": 0 },
-            { "label": "Todos Molidos para Espresso", "priceDelta": 0 },
-            { "label": "Mixto (Indicar en notas del pedido)", "priceDelta": 0 }
+            {
+              "label": "Todos en Grano Entero",
+              "priceDelta": 0
+            },
+            {
+              "label": "Todos Molidos para Filtro / V60",
+              "priceDelta": 0
+            },
+            {
+              "label": "Todos Molidos para Espresso",
+              "priceDelta": 0
+            },
+            {
+              "label": "Mixto (Indicar en notas del pedido)",
+              "priceDelta": 0
+            }
           ]
         }
       ]
@@ -259,8 +328,16 @@
       "tagline": "Trazabilidad desde la finca hasta tu taza.",
       "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
       "ctas": [
-        { "label": "Ver cafés de origen", "action": "catalog", "variant": "primary" },
-        { "label": "Consultar por WhatsApp", "action": "whatsapp", "variant": "outline" }
+        {
+          "label": "Ver cafés de origen",
+          "action": "catalog",
+          "variant": "primary"
+        },
+        {
+          "label": "Consultar por WhatsApp",
+          "action": "whatsapp",
+          "variant": "outline"
+        }
       ]
     },
     {

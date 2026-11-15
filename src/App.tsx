@@ -103,6 +103,18 @@ export const App: React.FC = () => {
     }
   }, [activeSlug]);
 
+  useEffect(() => {
+    if (activeTenant) {
+      if (isAdminView) {
+        document.title = `Panel de Control — ${activeTenant.brand.name} | AventoTech`;
+      } else if (!showFactoryBar) {
+        document.title = `${activeTenant.brand.name} — ${activeTenant.brand.tagline || 'Tienda Oficial & Pedidos Directos'}`;
+      } else {
+        document.title = `${activeTenant.brand.name} — AventoTech`;
+      }
+    }
+  }, [activeTenant, isAdminView, showFactoryBar]);
+
   const currentLines = cartBySlug[activeTenant.slug] ?? [];
 
   const cartCount = useMemo(

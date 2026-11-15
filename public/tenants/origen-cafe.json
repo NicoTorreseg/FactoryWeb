@@ -1,0 +1,323 @@
+{
+  "slug": "origen-cafe",
+  "templateType": "ecommerce",
+  "brand": {
+    "name": "Origen Tostadores de Café",
+    "tagline": "Café de especialidad tostado semanalmente en lotes pequeños · En grano o molido a medida",
+    "heroHeadline": "Café de especialidad recién tostado, *directo a tu taza*.",
+    "heroSubheadline": "Granos de origen único seleccionados de Colombia, Brasil y Etiopía. Tostado artesanal en Buenos Aires con perfil exacto para espresso o métodos de filtrado. Ahorrá el 18% vs plataformas comprando en nuestra tienda oficial.",
+    "heroBannerUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
+    "logoText": "ORIGEN ☕",
+    "locationLabel": "Tostaduría & Pick-Up en Colegiales, CABA · Envíos a todo el país",
+    "scheduleLabel": "Lun a Sáb 9:00 a 18:00 hs",
+    "isOpenNow": true,
+    "instagramHandle": "@origen.tostadores",
+    "ratingScore": 4.9,
+    "reviewsCount": 420
+  },
+  "theme": {
+    "mode": "light",
+    "preset": "editorial",
+    "allowModeToggle": true,
+    "primaryColor": "#291b15",
+    "accentColor": "#c47a38",
+    "borderRadius": "sharp",
+    "adminPin": "1234"
+  },
+  "platformComparison": {
+    "enabled": true,
+    "platformName": "Mercado Libre",
+    "sellerBadge": "Tostaduría Oficial ORIGEN · MercadoLíder Platinum (+1.200 ventas)",
+    "commissionSavedPercent": 18,
+    "externalProfileUrl": "https://www.mercadolibre.com.ar/pagina/origen-cafe"
+  },
+  "commerce": {
+    "currencySymbol": "$",
+    "whatsappPhone": "5491138405921",
+    "transferDiscountPercent": 10,
+    "mercadoPagoAlias": "origen.tostadores.mp",
+    "freeShippingThreshold": 45000,
+    "flatShippingCost": 4900,
+    "installmentsText": "10% OFF extra por Transferencia o Efectivo al retirar en tostaduría",
+    "deliveryTimeEstimate": "Despacho en 24hs a todo el país o Retiro hoy en Colegiales (CABA)"
+  },
+  "trustHighlights": [
+    {
+      "title": "Tostado Semanal Fresco",
+      "subtitle": "Nunca café estacionado: tostamos en tandas pequeñas cada 48 hs"
+    },
+    {
+      "title": "Molienda Personalizada",
+      "subtitle": "Elegí en grano o molido fino, medio o grueso según tu cafetera"
+    },
+    {
+      "title": "Ahorro Directo (-18%)",
+      "subtitle": "Sin comisiones de intermediarios + 10% OFF por transferencia"
+    },
+    {
+      "title": "Trazabilidad Total",
+      "subtitle": "Fincas de altura con comercio justo y notas de cata certificadas"
+    }
+  ],
+  "categories": [
+    {
+      "id": "origenes-unicos",
+      "name": "Orígenes Únicos (Single Origin)",
+      "description": "Lotes de fincas de altura seleccionadas"
+    },
+    {
+      "id": "blends-espresso",
+      "name": "Blends de la Casa",
+      "description": "Equilibrio perfecto de dulzura, cuerpo y crema"
+    },
+    {
+      "id": "packs-degustacion",
+      "name": "Packs & Degustación",
+      "description": "Combos para explorar diferentes perfiles sensoriales"
+    }
+  ],
+  "items": [
+    {
+      "id": "cafe-colombia-huila",
+      "sku": "CF-COL-250",
+      "title": "Colombia Huila – Finca El Mirador (250g)",
+      "description": "Origen: Huila, Colombia · Altura: 1.750 msnm · Variedad: Caturra / Castillo · Beneficio: Lavado. Notas sensoriales a panela, manzana verde crocante y chocolate con leche. Acidez brillante y final dulce y prolongado.",
+      "categoryId": "origenes-unicos",
+      "price": 18900,
+      "compareAtPlatformPrice": 23200,
+      "images": [
+        "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=900&q=80",
+        "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Favorito de la Casa",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Tostado ayer · 18 bolsas listas",
+      "variants": [
+        {
+          "name": "Tipo de Molienda",
+          "required": true,
+          "options": [
+            { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
+            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
+            { "label": "Molido Filtro / V60 / Cafetera (Medio)", "priceDelta": 0 },
+            { "label": "Molido Prensa Francesa / Cold Brew (Grueso)", "priceDelta": 0 }
+          ]
+        },
+        {
+          "name": "Presentación",
+          "required": false,
+          "options": [
+            { "label": "Bolsa 250g con Válvula Degasificadora", "priceDelta": 0 },
+            { "label": "Bolsa 500g (+ Ahorro)", "priceDelta": 16000 },
+            { "label": "Bolsa 1 kg Familiar / Barista", "priceDelta": 42000 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cafe-brasil-cerrado",
+      "sku": "CF-BRA-250",
+      "title": "Brasil Cerrado Mineiro – Fazenda Rainha (250g)",
+      "description": "Origen: Minas Gerais, Brasil · Altura: 1.200 msnm · Variedad: Bourbon Amarillo · Beneficio: Natural. Notas a avellanas tostadas, cacao amargo y caramelo toffee. Cuerpo denso, crema espesa y acidez baja. Ideal para espresso y cortes con leche.",
+      "categoryId": "origenes-unicos",
+      "price": 16800,
+      "compareAtPlatformPrice": 20500,
+      "images": [
+        "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Cuerpo Intenso",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "En stock",
+      "variants": [
+        {
+          "name": "Tipo de Molienda",
+          "required": true,
+          "options": [
+            { "label": "En Grano Entero", "priceDelta": 0 },
+            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
+            { "label": "Molido Filtro / V60 (Medio)", "priceDelta": 0 },
+            { "label": "Molido Prensa Francesa (Grueso)", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cafe-etiopia-yirgacheffe",
+      "sku": "CF-ETH-250",
+      "title": "Etiopía Yirgacheffe – Lote Konga (250g)",
+      "description": "Origen: Yirgacheffe, Etiopía · Altura: 2.100 msnm · Variedad: Heirloom nativo · Beneficio: Lavado. Un café floral y exótico inconfundible. Notas de jazmín silvestre, bergamota, té negro y durazno blanco. Acidez cítrica elegante y cuerpo sedoso.",
+      "categoryId": "origenes-unicos",
+      "price": 22400,
+      "compareAtPlatformPrice": 27500,
+      "images": [
+        "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Edición Limitada",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "Últimas 12 bolsas",
+      "variants": [
+        {
+          "name": "Tipo de Molienda",
+          "required": true,
+          "options": [
+            { "label": "En Grano Entero (Recomendado)", "priceDelta": 0 },
+            { "label": "Molido Filtro / V60 / Kalita (Medio)", "priceDelta": 0 },
+            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
+            { "label": "Molido Prensa Francesa (Grueso)", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blend-barista-espresso",
+      "sku": "CF-BLD-500",
+      "title": "Blend Barista Origen – Tostado Italiano (500g)",
+      "description": "60% Brasil Natural + 40% Colombia Lavado. El blend estrella de nuestra tostaduría, diseñado específicamente para quienes buscan un café con cuerpo redondo, abundante crema avellana y notas de chocolate semiamargo y almendras.",
+      "categoryId": "blends-espresso",
+      "price": 29500,
+      "compareAtPlatformPrice": 36000,
+      "images": [
+        "https://images.unsplash.com/photo-1610632380989-680fe40816c6?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Más Vendido MeLi",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "En stock",
+      "variants": [
+        {
+          "name": "Tipo de Molienda",
+          "required": true,
+          "options": [
+            { "label": "En Grano Entero", "priceDelta": 0 },
+            { "label": "Molido Espresso (Fino)", "priceDelta": 0 },
+            { "label": "Molido Cafetera Moka / Italiana", "priceDelta": 0 },
+            { "label": "Molido Filtro (Medio)", "priceDelta": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pack-trio-degustacion",
+      "sku": "CF-TRIO-750",
+      "title": "Pack Trío Degustación de Orígenes (3 × 250g)",
+      "description": "Incluye 1 bolsa de Colombia Huila (250g) + 1 bolsa de Brasil Cerrado (250g) + 1 bolsa de Blend Barista (250g). El combo ideal para explorar los diferentes perfiles sensoriales de América Latina. Incluye rueda de sabores para cata en casa.",
+      "categoryId": "packs-degustacion",
+      "price": 54900,
+      "compareAtPlatformPrice": 68000,
+      "images": [
+        "https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=900&q=80"
+      ],
+      "badge": "Envío Gratis + 10% OFF",
+      "featured": true,
+      "inStock": true,
+      "stockLabel": "En stock",
+      "variants": [
+        {
+          "name": "Tipo de Molienda del Pack",
+          "required": true,
+          "options": [
+            { "label": "Todos en Grano Entero", "priceDelta": 0 },
+            { "label": "Todos Molidos para Filtro / V60", "priceDelta": 0 },
+            { "label": "Todos Molidos para Espresso", "priceDelta": 0 },
+            { "label": "Mixto (Indicar en notas del pedido)", "priceDelta": 0 }
+          ]
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-1",
+      "author": "Matías S.",
+      "rating": 5,
+      "comment": "El café de Colombia Huila tostado la semana pasada es una locura. Notas cítricas y aroma que llena toda la cocina al molerlo. Compraba siempre por MeLi pero por acá retiro en Colegiales y me ahorré más de $8.000 con el descuento por transferencia.",
+      "dateLabel": "Hace 3 días",
+      "source": "Mercado Libre"
+    },
+    {
+      "id": "rev-2",
+      "author": "Florencia G.",
+      "rating": 5,
+      "comment": "Excelente el Blend Barista para la cafetera espresso de casa. La molienda fina vino perfecta y el paquete con válvula mantiene el grano fresco un mes entero. Muy recomendables.",
+      "dateLabel": "Hace 1 semana",
+      "source": "Mercado Libre"
+    },
+    {
+      "id": "rev-3",
+      "author": "Esteban R.",
+      "rating": 5,
+      "comment": "Atención impecable por WhatsApp para elegir el café adecuado para mi V60. El Trío Degustación es ideal para regalar o para ir probando distintos perfiles.",
+      "dateLabel": "Hace 2 semanas",
+      "source": "Mercado Libre"
+    }
+  ],
+  "sections": [
+    {
+      "type": "hero",
+      "eyebrow": "Tostaduría Artesanal · Colegiales, CABA",
+      "headline": "Café de especialidad tostado *en lotes pequeños*.",
+      "tagline": "Trazabilidad desde la finca hasta tu taza.",
+      "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1600&q=80",
+      "ctas": [
+        { "label": "Ver cafés de origen", "action": "catalog", "variant": "primary" },
+        { "label": "Consultar por WhatsApp", "action": "whatsapp", "variant": "outline" }
+      ]
+    },
+    {
+      "type": "story",
+      "variant": "framed",
+      "eyebrow": "Nuestro método",
+      "headline": "Tostamos en *lotes pequeños*, grano por grano.",
+      "body": [
+        "Seleccionamos lotes exclusivos de fincas de alta montaña en Colombia, Brasil y Etiopía.",
+        "Tostamos cada 48 horas en tostadora de tambor para preservar las notas naturales de cada variedad, sin quemar el grano ni enmascarar sabores.",
+        "Podés pedirlo en grano entero para moler en casa o te lo molemos en el acto calibrado para tu cafetera: espresso, filtro o prensa francesa."
+      ],
+      "imageUrl": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=80",
+      "signature": "— Tostadores & Baristas, Origen Colegiales"
+    },
+    {
+      "type": "product_grid",
+      "id": "catalog",
+      "eyebrow": "Orígenes & Blends",
+      "title": "Elegí tu *café de la semana*"
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Paso a paso",
+      "title": "Tu café perfecto en *tres pasos*",
+      "steps": [
+        {
+          "title": "Elegís tu origen y molienda",
+          "text": "Seleccionás el café que más te guste e indicás si lo querés en grano o molido para tu método."
+        },
+        {
+          "title": "Tostamos y despachamos",
+          "text": "Envasamos con válvula degasificadora para que el aroma y frescura se mantengan intactos."
+        },
+        {
+          "title": "Disfrutás en tu casa",
+          "text": "Recibís en 24hs o retirás en nuestra tostaduría en Colegiales sin costos de envío."
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "eyebrow": "Comunidad cafetera",
+      "title": "Lo que dicen quienes ya *lo disfrutan*"
+    },
+    {
+      "type": "location",
+      "eyebrow": "Retiro y envíos",
+      "title": "Pasá por nuestra *tostaduría* o te lo enviamos"
+    },
+    {
+      "type": "cta_band",
+      "headline": "¿No sabés qué café elegir para tu cafetera? *Escribinos*.",
+      "ctaLabel": "Asesoramiento por WhatsApp"
+    }
+  ]
+}

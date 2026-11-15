@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CatalogItem, Category } from '../../domain/tenant.schema';
-import { X } from 'lucide-react';
+import { CheckCircle2, Image as ImageIcon, Sparkles, Upload, X } from 'lucide-react';
+import { optimizeImageFile, OptimizedImageResult } from '../importer/image-optimizer';
 
 interface ProductFormModalProps {
   item?: CatalogItem | null;
@@ -33,6 +34,28 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   );
   const [badge, setBadge] = useState(item?.badge || '');
   const [sku] = useState(item?.sku || '');
+  const [isProcessingImage, setIsProcessingImage] = useState(false);
+  const [optimizedStats, setOptimizedStats] = useState<OptimizedImageResult | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsProcessingImage(true);
+      const result = await optimizeImageFile(file, 1000, 0.82);
+      setImageUrl(result.dataUrl);
+      setOptimizedStats(result);
+    } catch (err) {
+      console.error('Error optimizando imagen:', err);
+      alert('No se pudo procesar la imagen. Verifica que sea un archivo JPG, PNG o WebP.');
+    } finally {
+      setIsProcessingImage(false);
+      // Reset input value to allow re-uploading the same file if desired
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -158,22 +181,88 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
             />
           </div>
 
-          <div>
-            <label className="block font-semibold mb-1 text-zinc-300">URL de Imagen</label>
-            <div className="flex gap-2">
-              <input
-                type="url"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="https://images.unsplash.com/..."
-                className="flex-1 rounded-xl bg-zinc-950 border border-zinc-800 px-3.5 py-2.5 outline-none focus:border-amber-500 text-xs"
-              />
-              <img
-                src={imageUrl}
-                alt="Preview"
-                className="h-10 w-10 rounded-lg object-cover border border-zinc-800 shrink-0"
-              />
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-zinc-300">
+                Imagen del Producto
+              </label>
+              <span className="text-[10px] text-zinc-400 font-medium">
+                Recomendado: 800×800 px (1:1) o 4:3
+              </span>
             </div>
+
+            {/* Direct Upload Button (Mobile camera / gallery / PC) */}
+            <div>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                accept="image/png,image/jpeg,image/webp,image/avif"
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isProcessingImage}
+                className="w-full flex items-center justify-center gap-2 rounded-xl border border-dashed border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/15 py-2.5 px-4 text-xs font-bold text-amber-400 transition"
+              >
+                {isProcessingImage ? (
+                  <>
+                    <Sparkles className="h-4 w-4 animate-spin text-amber-400" />
+                    <span>Comprimiendo y optimizando para web...</span>
+                  </>
+                ) : (
+                  <>
+                    <Upload className="h-4 w-4" />
+                    <span>Subir foto desde este dispositivo / celular</span>
+                  </>
+                )}
+              </button>
+            </div>
+
+            {/* Optimization Status Badge */}
+            {optimizedStats && (
+              <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-2.5 py-1">
+                <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />
+                <span>
+                  Foto optimizada: {optimizedStats.originalSizeKb} KB ➔ {optimizedStats.sizeKb} KB ({optimizedStats.width}×{optimizedStats.height}px)
+                </span>
+              </div>
+            )}
+
+            {/* URL input fallback */}
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[11px] text-zinc-400">O pegar enlace directo de imagen (URL):</span>
+              </div>
+              <div className="flex gap-2 items-center">
+                <input
+                  type="text"
+                  value={imageUrl}
+                  onChange={(e) => {
+                    setImageUrl(e.target.value);
+                    setOptimizedStats(null);
+                  }}
+                  placeholder="https://images.unsplash.com/... o https://http2.mlstatic.com/..."
+                  className="flex-1 rounded-xl bg-zinc-900 border border-zinc-800 px-3.5 py-2 outline-none focus:border-amber-500 text-xs text-zinc-200"
+                />
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="Preview"
+                    className="h-10 w-10 rounded-lg object-cover border border-zinc-700 shrink-0 bg-zinc-900"
+                  />
+                ) : (
+                  <div className="h-10 w-10 rounded-lg border border-zinc-800 bg-zinc-900 flex items-center justify-center shrink-0 text-zinc-600">
+                    <ImageIcon className="h-4 w-4" />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <p className="text-[10px] text-zinc-400 leading-tight">
+              💡 Si subís una foto pesada tomada con la cámara del celular (10-15 MB), el navegador la redimensiona automáticamente a 800-1000px y la comprime a WebP para que cargue al instante en conexiones móviles.
+            </p>
           </div>
 
           <div className="pt-4 flex gap-3">

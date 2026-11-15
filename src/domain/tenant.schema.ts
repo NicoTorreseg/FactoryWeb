@@ -68,6 +68,8 @@ export const ThemeConfigSchema = z.object({
   primaryColor: HexColorSchema,
   accentColor: HexColorSchema,
   borderRadius: z.enum(['sharp', 'rounded', 'pill']).default('rounded'),
+  /** Secret PIN for `/admin` access. Defaults to "1234". */
+  adminPin: z.string().default('1234'),
 });
 
 /* ------------------------------------------------------------------ */

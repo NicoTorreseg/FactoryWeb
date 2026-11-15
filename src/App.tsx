@@ -19,28 +19,43 @@ import {
   getValidationReports,
 } from './engine/tenant-registry';
 import { Storefront } from './engine/Storefront';
+import { AdminApp } from './admin/AdminApp';
+import { defaultStorageAdapter } from './admin/storage/adapter';
+import { Sliders } from 'lucide-react';
 
 function resolveInitialSlug(): {
   slug: string | null;
   isCleanCaptureMode: boolean;
+  isAdminMode: boolean;
 } {
   const path = window.location.pathname;
   const params = new URLSearchParams(window.location.search);
   const isCleanCaptureMode = params.get('capture') === '1';
+  const isAdminParam = params.get('admin') === '1' || path.includes('/admin');
+
+  // Support `/d/{slug}/admin` or `/admin`
+  if (path === '/admin') {
+    return { slug: params.get('demo') || null, isCleanCaptureMode, isAdminMode: true };
+  }
+
+  const adminMatch = path.match(/^\/d\/([^/]+)\/admin/);
+  if (adminMatch && adminMatch[1]) {
+    return { slug: decodeURIComponent(adminMatch[1]), isCleanCaptureMode, isAdminMode: true };
+  }
 
   // Support `/d/{slug}` clean URLs (Cloudflare Pages / Vercel)
   const match = path.match(/^\/d\/([^/]+)/);
   if (match && match[1]) {
-    return { slug: decodeURIComponent(match[1]), isCleanCaptureMode };
+    return { slug: decodeURIComponent(match[1]), isCleanCaptureMode, isAdminMode: isAdminParam };
   }
 
   // Also support `?demo={slug}` query param
   const queryDemo = params.get('demo');
   if (queryDemo) {
-    return { slug: queryDemo, isCleanCaptureMode };
+    return { slug: queryDemo, isCleanCaptureMode, isAdminMode: isAdminParam };
   }
 
-  return { slug: null, isCleanCaptureMode };
+  return { slug: null, isCleanCaptureMode, isAdminMode: isAdminParam };
 }
 
 export const App: React.FC = () => {
@@ -63,6 +78,7 @@ export const App: React.FC = () => {
   );
   const [mobilePreview, setMobilePreview] = useState<boolean>(false);
   const [copiedEmail, setCopiedEmail] = useState<boolean>(false);
+  const [isAdminView, setIsAdminView] = useState<boolean>(initial.isAdminMode);
 
   // Cart & Modal State (scoped per active tenant)
   const [cartBySlug, setCartBySlug] = useState<Record<string, CartLineItem[]>>({});
@@ -70,13 +86,14 @@ export const App: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
 
   const activeTenant = useMemo(() => {
-    return (
+    const base =
       (activeSlug ? getTenantBySlug(activeSlug) : undefined) ??
       runtimeTenant ??
       getTenantBySlug('pasta-comedia') ??
-      allTenants[0]
-    );
-  }, [activeSlug, runtimeTenant, allTenants]);
+      allTenants[0];
+    // Load local storage overrides if present
+    return defaultStorageAdapter.load(base.slug, base);
+  }, [activeSlug, runtimeTenant, allTenants, isAdminView]);
 
   useEffect(() => {
     if (!getTenantBySlug(activeSlug)) {
@@ -184,6 +201,15 @@ export const App: React.FC = () => {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
+  if (isAdminView) {
+    return (
+      <AdminApp
+        tenant={activeTenant}
+        onExitAdmin={() => setIsAdminView(false)}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-zinc-950">
       {/* Factory Operator Top Bar (Hidden when ?capture=1 is used by Playwright) */}
@@ -252,6 +278,15 @@ export const App: React.FC = () => {
                     <span>Vista Escritorio</span>
                   </>
                 )}
+              </button>
+
+              <button
+                onClick={() => setIsAdminView(true)}
+                className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 px-2.5 py-1.5 text-xs font-semibold text-amber-400 transition"
+                title="Abrir Panel de Administración (/admin)"
+              >
+                <Sliders className="h-3.5 w-3.5" />
+                <span>Panel /admin</span>
               </button>
 
               <button

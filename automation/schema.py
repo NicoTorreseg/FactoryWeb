@@ -71,6 +71,7 @@ class ThemeConfig(CamelModel):
     primary_color: HexColor
     accent_color: HexColor
     border_radius: Literal["sharp", "rounded", "pill"] = "rounded"
+    admin_pin: str = "1234"
 
 
 # --------------------------------------------------------------------------- #

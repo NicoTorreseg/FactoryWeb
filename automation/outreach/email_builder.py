@@ -88,7 +88,7 @@ Si les gusta cómo quedó, respóndanme este mail o avísenme por WhatsApp y la 
 
   <p style="margin-top: 24px;">
     ¡Saludos!<br />
-    <strong>Equipo DemoFactory</strong>
+    <strong>Equipo AventoTech</strong>
   </p>
 </body>
 </html>

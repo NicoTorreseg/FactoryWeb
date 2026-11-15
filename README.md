@@ -1,4 +1,4 @@
-# DemoFactory — Motor Multi-Tenant de Tiendas & Catálogos con IA
+# AventoTech — Motor Multi-Tenant de Tiendas & Catálogos con IA
 
 Arquitectura *Schema-Driven* pensada para generar y servir decenas o cientos de **demos web profesionales** para:
 1. **Vendedores de Mercado Libre / Emprendedores (`templateType: "ecommerce"`):** Catálogo con comparador automático de ahorro directo (*"Precio Web vs Mercado Libre"*), descuento por transferencia, variantes y carrito a WhatsApp / Mercado Pago.
@@ -9,7 +9,7 @@ Arquitectura *Schema-Driven* pensada para generar y servir decenas o cientos de 
 ## Arquitectura de Ingeniería de Software
 
 ```text
-DemoFactory/
+aventotech/
 ├── public/
 │   └── _redirects                  # Regla SPA para Cloudflare Pages (Costo $0)
 ├── src/

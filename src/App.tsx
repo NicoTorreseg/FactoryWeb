@@ -219,7 +219,7 @@ export const App: React.FC = () => {
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500/15 border border-amber-500/30 px-2.5 py-1 text-xs font-extrabold text-amber-400">
                 <Layers className="h-3.5 w-3.5" />
-                DemoFactory Engine
+                AventoTech Engine
               </span>
 
               {/* Tenant Selector Pills */}

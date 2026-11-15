@@ -137,13 +137,13 @@ export const AdminApp: React.FC<AdminAppProps> = ({ tenant, onExitAdmin }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     if (typeof window === 'undefined') return false;
     return (
-      window.sessionStorage.getItem(`demofactory:auth:${tenant.slug}`) === 'true'
+      window.sessionStorage.getItem(`aventotech:auth:${tenant.slug}`) === 'true'
     );
   });
 
   const handleAuthenticated = () => {
     if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem(`demofactory:auth:${tenant.slug}`, 'true');
+      window.sessionStorage.setItem(`aventotech:auth:${tenant.slug}`, 'true');
     }
     setIsAuthenticated(true);
   };

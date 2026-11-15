@@ -16,7 +16,7 @@ interface ThemeModeContextValue {
 
 const ThemeModeContext = createContext<ThemeModeContextValue | null>(null);
 
-const storageKey = (slug: string) => `demofactory:mode:${slug}`;
+const storageKey = (slug: string) => `aventotech:mode:${slug}`;
 
 function isColorMode(value: unknown): value is ColorMode {
   return value === 'light' || value === 'dark';

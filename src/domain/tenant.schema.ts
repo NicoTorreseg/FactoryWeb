@@ -177,6 +177,10 @@ export const CommerceConfigSchema = z.object({
   whatsappPhone: z.string(), // E.164 digits without +
   transferDiscountPercent: z.number().min(0).max(50).default(10),
   mercadoPagoAlias: z.string().optional(),
+  mercadoPagoPublicKey: z.string().optional(),
+  mercadoPagoAccessToken: z.string().optional(),
+  mercadoPagoDirectLink: z.string().optional(),
+  mercadoPagoCheckoutProEnabled: z.boolean().default(true),
   freeShippingThreshold: z.number().optional(),
   flatShippingCost: z.number().default(0),
   installmentsText: z.string().optional(), // e.g. "3 y 6 cuotas sin interés con todas las tarjetas"

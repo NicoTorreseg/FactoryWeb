@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import {
+  AlertCircle,
   CheckCircle2,
+  Copy,
   CreditCard,
+  Loader2,
+  Lock,
   MessageCircle,
   ShoppingBag,
   Sparkles,
@@ -44,6 +48,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     notes: '',
   });
 
+  const [isMpLoading, setIsMpLoading] = useState(false);
+  const [mpError, setMpError] = useState<string | null>(null);
+  const [aliasCopied, setAliasCopied] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
+
   if (!isOpen) return null;
 
   const isDark = tenant.theme.mode === 'dark';
@@ -77,6 +86,112 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         )
       : 100;
 
+  const copyAlias = () => {
+    if (tenant.commerce.mercadoPagoAlias) {
+      navigator.clipboard.writeText(tenant.commerce.mercadoPagoAlias);
+      setAliasCopied(true);
+      setTimeout(() => setAliasCopied(false), 2500);
+    }
+  };
+
+  const handleMercadoPagoCheckout = async () => {
+    setValidationError(null);
+    setMpError(null);
+
+    if (!customer.customerName.trim()) {
+      setValidationError('Por favor ingresá tu nombre antes de continuar.');
+      return;
+    }
+
+    if (customer.deliveryMethod === 'delivery' && !customer.address.trim()) {
+      setValidationError('Por favor ingresá tu dirección para el envío.');
+      return;
+    }
+
+    setIsMpLoading(true);
+
+    try {
+      const itemsPayload = lines.map((line) => {
+        const unitPrice = calculateUnitPriceWithVariants(line);
+        const variantText = Object.entries(line.selectedVariants)
+          .map(([k, v]) => `${k}: ${v.label}`)
+          .join(' · ');
+        return {
+          id: line.item.id,
+          title: `${line.item.title}${variantText ? ` (${variantText})` : ''}`,
+          description: line.item.description || line.item.title,
+          quantity: line.quantity,
+          unit_price: unitPrice,
+          picture_url: line.item.images?.[0],
+        };
+      });
+
+      const body = {
+        items: itemsPayload,
+        payer: {
+          name: customer.customerName.trim(),
+          address:
+            customer.deliveryMethod === 'delivery'
+              ? customer.address.trim()
+              : 'Retiro en punto de venta',
+        },
+        tenantSlug: tenant.slug,
+        accessToken: tenant.commerce.mercadoPagoAccessToken,
+        shippingCost: totals.shippingCost,
+      };
+
+      const res = await fetch('/api/create-preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(
+          errorData.error || `Error del servidor (${res.status})`
+        );
+      }
+
+      const data = await res.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+        return;
+      }
+
+      throw new Error('No se recibió la URL de pago de Mercado Pago.');
+    } catch (err: any) {
+      console.warn('Mercado Pago preference creation notice:', err.message);
+
+      // Graceful Fallback Strategy:
+      // 1. If merchant provided direct payment link, redirect there
+      if (tenant.commerce.mercadoPagoDirectLink) {
+        window.open(tenant.commerce.mercadoPagoDirectLink, '_blank');
+        setIsMpLoading(false);
+        return;
+      }
+
+      // 2. If merchant has alias, instruct customer to transfer via MP and notify WhatsApp
+      if (tenant.commerce.mercadoPagoAlias) {
+        setMpError(
+          `Podés transferir directamente con Mercado Pago al Alias "${tenant.commerce.mercadoPagoAlias}". Hacé clic en "Confirmar por WhatsApp" para enviar tu comprobante.`
+        );
+        setIsMpLoading(false);
+        return;
+      }
+
+      // 3. Fallback to WhatsApp order
+      setMpError(
+        'La tienda está terminando de conectar su cuenta de Mercado Pago. Te abrimos el pedido pre-cargado en WhatsApp para coordinar tu pago.'
+      );
+      setTimeout(() => {
+        window.open(whatsappUrl, '_blank');
+      }, 1800);
+    } finally {
+      setIsMpLoading(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm">
       <div
@@ -89,7 +204,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         {/* Drawer Header */}
         <div className="flex items-center justify-between border-b border-zinc-500/20 px-5 py-4">
           <div className="flex items-center gap-2.5">
-            <ShoppingBag className="h-5 w-5" style={{ color: tenant.theme.primaryColor }} />
+            <ShoppingBag
+              className="h-5 w-5"
+              style={{ color: tenant.theme.primaryColor }}
+            />
             <div>
               <h2 className="text-base font-bold">Tu Pedido Directo</h2>
               <p className="text-xs opacity-65">
@@ -129,7 +247,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   </span>
                 )}
               </span>
-              <span className="font-mono opacity-70">{freeShippingProgress}%</span>
+              <span className="font-mono opacity-70">
+                {freeShippingProgress}%
+              </span>
             </div>
             <div className="h-1.5 w-full rounded-full bg-zinc-500/20 overflow-hidden">
               <div
@@ -246,7 +366,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               })}
             </div>
 
-            {/* Delivery & Payment Configuration */}
+            {/* Customer & Checkout Form */}
             <div className="space-y-3 pt-2 border-t border-zinc-500/20">
               <h3 className="text-xs font-bold uppercase tracking-wider opacity-70">
                 1. Modalidad de Entrega
@@ -295,12 +415,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="grid grid-cols-1 gap-2.5 pt-1">
                 <input
                   type="text"
-                  placeholder="Tu nombre completo"
+                  placeholder="Tu nombre completo *"
                   value={customer.customerName}
-                  onChange={(e) =>
-                    setCustomer((c) => ({ ...c, customerName: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setValidationError(null);
+                    setCustomer((c) => ({
+                      ...c,
+                      customerName: e.target.value,
+                    }));
+                  }}
                   className={`w-full rounded-xl border px-3 py-2 text-xs outline-none ${
+                    validationError && !customer.customerName
+                      ? 'border-red-500'
+                      : ''
+                  } ${
                     isDark
                       ? 'bg-zinc-950 border-zinc-800'
                       : 'bg-zinc-50 border-zinc-200'
@@ -309,12 +437,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 {customer.deliveryMethod === 'delivery' && (
                   <input
                     type="text"
-                    placeholder="Dirección de entrega y localidad / CP"
+                    placeholder="Dirección de entrega y localidad / CP *"
                     value={customer.address}
-                    onChange={(e) =>
-                      setCustomer((c) => ({ ...c, address: e.target.value }))
-                    }
+                    onChange={(e) => {
+                      setValidationError(null);
+                      setCustomer((c) => ({
+                        ...c,
+                        address: e.target.value,
+                      }));
+                    }}
                     className={`w-full rounded-xl border px-3 py-2 text-xs outline-none ${
+                      validationError && !customer.address
+                        ? 'border-red-500'
+                        : ''
+                    } ${
                       isDark
                         ? 'bg-zinc-950 border-zinc-800'
                         : 'bg-zinc-50 border-zinc-200'
@@ -323,8 +459,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 )}
               </div>
 
+              {validationError && (
+                <div className="flex items-center gap-1.5 text-xs text-red-500 font-medium">
+                  <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                  <span>{validationError}</span>
+                </div>
+              )}
+
               <h3 className="text-xs font-bold uppercase tracking-wider opacity-70 pt-2">
-                2. Medio de Pago Preferido
+                2. Medio de Pago
               </h3>
               <div className="grid grid-cols-2 gap-2">
                 <button
@@ -356,7 +499,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   }
                   className={`flex items-center gap-2 rounded-xl border p-2.5 text-xs font-semibold transition ${
                     customer.paymentMethod === 'mercadopago'
-                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-500'
+                      ? 'border-blue-500 bg-blue-500/10 text-blue-400'
                       : 'border-zinc-500/20 opacity-75'
                   }`}
                 >
@@ -364,11 +507,92 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   <div className="text-left">
                     <div>Mercado Pago</div>
                     <div className="text-[10px] opacity-75">
-                      Tarjetas / Dinero en cuenta
+                      Tarjetas / Cuotas
                     </div>
                   </div>
                 </button>
               </div>
+
+              {/* Informative details based on payment method */}
+              {customer.paymentMethod === 'transfer' &&
+                tenant.commerce.mercadoPagoAlias && (
+                  <div className="rounded-xl bg-zinc-800/40 border border-zinc-700/50 p-2.5 text-xs flex items-center justify-between">
+                    <div>
+                      <span className="opacity-60 text-[10px] block">
+                        Alias para transferir:
+                      </span>
+                      <span className="font-mono font-bold text-emerald-400">
+                        {tenant.commerce.mercadoPagoAlias}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={copyAlias}
+                      className="flex items-center gap-1 rounded-lg bg-zinc-700 hover:bg-zinc-600 px-2.5 py-1 text-[11px] font-semibold transition"
+                    >
+                      {aliasCopied ? (
+                        <>
+                          <CheckCircle2 className="h-3 w-3 text-emerald-400" />
+                          <span>¡Copiado!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3 w-3" />
+                          <span>Copiar</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+
+              {customer.paymentMethod === 'mercadopago' && (
+                <div className="rounded-xl bg-blue-950/20 border border-blue-500/20 p-2.5 text-xs space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-blue-400 flex items-center gap-1">
+                      <Lock className="h-3 w-3" /> Checkout Pro Oficial
+                    </span>
+                    <span className="text-[10px] opacity-70">
+                      Hasta 12 cuotas
+                    </span>
+                  </div>
+                  <p className="text-[11px] opacity-75 leading-tight">
+                    Aboná de forma segura con Tarjeta de Crédito, Débito,
+                    Mercado Crédito o dinero disponible en cuenta.
+                  </p>
+                  <div className="flex flex-wrap gap-1 pt-0.5 text-[9px] font-semibold opacity-80">
+                    <span className="px-1.5 py-0.5 rounded bg-zinc-800">
+                      Visa
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-zinc-800">
+                      Mastercard
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-zinc-800">
+                      Mercado Crédito
+                    </span>
+                    <span className="px-1.5 py-0.5 rounded bg-zinc-800">
+                      Dinero en MP
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {mpError && (
+                <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 p-3 text-xs text-amber-300 space-y-2">
+                  <div className="flex items-start gap-1.5">
+                    <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                    <span>{mpError}</span>
+                  </div>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 underline"
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    Confirmar pedido por WhatsApp ahora
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -408,20 +632,65 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
             </div>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 py-3.5 px-4 text-sm font-bold text-white shadow-lg transition"
-            >
-              <MessageCircle className="h-5 w-5" />
-              <span>Enviar Pedido por WhatsApp ({formatARS(finalAmount, sym)})</span>
-            </a>
-            <p className="text-[11px] text-center opacity-60 flex items-center justify-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-              El pedido se abre pre-cargado en el WhatsApp oficial de{' '}
-              {tenant.brand.name}
-            </p>
+            {/* Action CTA depending on Payment Method */}
+            {customer.paymentMethod === 'mercadopago' ? (
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={handleMercadoPagoCheckout}
+                  disabled={isMpLoading}
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 py-3.5 px-4 text-sm font-bold text-white shadow-lg transition"
+                >
+                  {isMpLoading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      <span>Iniciando Checkout Seguro...</span>
+                    </>
+                  ) : (
+                    <>
+                      <CreditCard className="h-5 w-5" />
+                      <span>
+                        Pagar con Mercado Pago ({formatARS(finalAmount, sym)})
+                      </span>
+                    </>
+                  )}
+                </button>
+
+                <div className="flex items-center justify-between text-[11px] opacity-70 px-1">
+                  <span className="flex items-center gap-1">
+                    <Lock className="h-3 w-3 text-emerald-400" />
+                    Pasarela oficial y cifrada
+                  </span>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-zinc-400 hover:text-white"
+                  >
+                    ¿Preferís WhatsApp?
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 py-3.5 px-4 text-sm font-bold text-white shadow-lg transition"
+                >
+                  <MessageCircle className="h-5 w-5" />
+                  <span>
+                    Enviar Pedido por WhatsApp ({formatARS(finalAmount, sym)})
+                  </span>
+                </a>
+                <p className="text-[11px] text-center opacity-60 flex items-center justify-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                  El pedido se abre pre-cargado en el WhatsApp oficial de{' '}
+                  {tenant.brand.name}
+                </p>
+              </div>
+            )}
           </div>
         )}
       </div>

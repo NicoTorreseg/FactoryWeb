@@ -184,6 +184,10 @@ class CommerceConfig(CamelModel):
     whatsapp_phone: str
     transfer_discount_percent: int = Field(default=10, ge=0, le=50)
     mercado_pago_alias: str | None = None
+    mercado_pago_public_key: str | None = None
+    mercado_pago_access_token: str | None = None
+    mercado_pago_direct_link: str | None = None
+    mercado_pago_checkout_pro_enabled: bool = True
     free_shipping_threshold: int | None = None
     flat_shipping_cost: int = 0
     installments_text: str | None = None

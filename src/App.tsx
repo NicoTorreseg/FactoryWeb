@@ -73,6 +73,7 @@ export const App: React.FC = () => {
     }
   }, [initial.slug]);
   const [runtimeTenant, setRuntimeTenant] = useState<TenantConfig | null>(null);
+  const [cloudTenant, setCloudTenant] = useState<TenantConfig | null>(null);
   const [showFactoryBar, setShowFactoryBar] = useState<boolean>(
     !initial.isCleanCaptureMode
   );
@@ -87,13 +88,35 @@ export const App: React.FC = () => {
 
   const activeTenant = useMemo(() => {
     const base =
+      (cloudTenant && cloudTenant.slug === activeSlug ? cloudTenant : undefined) ??
       (activeSlug ? getTenantBySlug(activeSlug) : undefined) ??
       runtimeTenant ??
       getTenantBySlug('pasta-comedia') ??
       allTenants[0];
     // Load local storage overrides if present
     return defaultStorageAdapter.load(base.slug, base);
-  }, [activeSlug, runtimeTenant, allTenants, isAdminView]);
+  }, [activeSlug, cloudTenant, runtimeTenant, allTenants, isAdminView]);
+
+  // Synchronize with cloud-published tenant for mobile devices & live customers
+  useEffect(() => {
+    let isCurrent = true;
+    if (activeSlug) {
+      fetch(`/api/tenant?slug=${encodeURIComponent(activeSlug)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (isCurrent && data && data.slug === activeSlug) {
+            setCloudTenant(data);
+            defaultStorageAdapter.save(data);
+          }
+        })
+        .catch(() => {
+          // Fallback to static base
+        });
+    }
+    return () => {
+      isCurrent = false;
+    };
+  }, [activeSlug]);
 
   useEffect(() => {
     if (!getTenantBySlug(activeSlug)) {

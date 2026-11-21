@@ -3,6 +3,7 @@ import { useAdmin } from '../AdminContext';
 import { CatalogItem } from '../../domain/tenant.schema';
 import { ProductFormModal } from './ProductFormModal';
 import { parseProductsCsv, generateCsvTemplate } from '../importer/csv-parser';
+import { formatARS } from '../../domain/pricing';
 import {
   Search,
   Plus,
@@ -12,16 +13,25 @@ import {
   Edit2,
   CheckCircle2,
   XCircle,
+  Truck,
+  UploadCloud,
+  Loader2,
+  Settings2,
+  X,
 } from 'lucide-react';
 
 export const ProductsTab: React.FC = () => {
   const {
     tenant,
+    updateTenant,
     updateProduct,
     addProduct,
     deleteProduct,
     toggleProductStock,
     importProducts,
+    hasUnsavedChanges,
+    isPublishing,
+    publishToCloud,
   } = useAdmin();
 
   const [search, setSearch] = useState('');
@@ -32,6 +42,15 @@ export const ProductsTab: React.FC = () => {
   const [showCsvModal, setShowCsvModal] = useState(false);
   const [csvText, setCsvText] = useState('');
   const [importNotice, setImportNotice] = useState<string | null>(null);
+
+  // Quick Shipping Editor state
+  const [showShippingModal, setShowShippingModal] = useState(false);
+  const [tempShippingCost, setTempShippingCost] = useState(
+    tenant.commerce.flatShippingCost.toString()
+  );
+  const [tempFreeThreshold, setTempFreeThreshold] = useState(
+    tenant.commerce.freeShippingThreshold?.toString() || ''
+  );
 
   const sym = tenant.commerce.currencySymbol;
 
@@ -85,8 +104,23 @@ export const ProductsTab: React.FC = () => {
     reader.readAsText(file);
   };
 
+  const handleSaveShipping = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateTenant((prev) => ({
+      ...prev,
+      commerce: {
+        ...prev.commerce,
+        flatShippingCost: parseInt(tempShippingCost, 10) || 0,
+        freeShippingThreshold: tempFreeThreshold
+          ? parseInt(tempFreeThreshold, 10)
+          : undefined,
+      },
+    }));
+    setShowShippingModal(false);
+  };
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Top Action Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-zinc-900 border border-zinc-800 p-4 rounded-2xl">
         <div>
@@ -98,22 +132,91 @@ export const ProductsTab: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Botón de Publicar Cambios integrado */}
+          <button
+            onClick={() => publishToCloud()}
+            disabled={isPublishing}
+            className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold transition shadow ${
+              hasUnsavedChanges
+                ? 'bg-emerald-600 hover:bg-emerald-500 text-white animate-pulse'
+                : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700'
+            }`}
+            title="Publica los cambios para que se vean en celulares y nuevos clientes"
+          >
+            {isPublishing ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>Publicando...</span>
+              </>
+            ) : (
+              <>
+                <UploadCloud className="h-4 w-4 text-emerald-400" />
+                <span>
+                  {hasUnsavedChanges
+                    ? 'Publicar Cambios'
+                    : 'Sincronizado'}
+                </span>
+              </>
+            )}
+          </button>
+
           <button
             onClick={() => setShowCsvModal(true)}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition"
           >
             <FileSpreadsheet className="h-4 w-4 text-emerald-400" />
-            <span>Importar Excel / CSV</span>
+            <span>Excel / CSV</span>
           </button>
+
           <button
             onClick={() => setEditingItem(null)}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs font-bold text-zinc-950 transition shadow"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs font-bold text-zinc-950 transition shadow"
           >
             <Plus className="h-4 w-4" />
             <span>Nuevo Producto</span>
           </button>
         </div>
+      </div>
+
+      {/* Quick Logistics & Shipping Config Bar */}
+      <div className="bg-zinc-900/60 border border-zinc-800 p-3.5 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-blue-500/15 text-blue-400 shrink-0">
+            <Truck className="h-4 w-4" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-bold text-zinc-200">Tarifa de Envío Fijo:</span>
+              <span className="font-mono font-bold text-emerald-400">
+                {tenant.commerce.flatShippingCost > 0
+                  ? formatARS(tenant.commerce.flatShippingCost, sym)
+                  : 'Gratis ($0)'}
+              </span>
+            </div>
+            <p className="text-[11px] text-zinc-400 mt-0.5">
+              {tenant.commerce.freeShippingThreshold
+                ? `Envío Gratis bonificado en compras superiores a ${formatARS(
+                    tenant.commerce.freeShippingThreshold,
+                    sym
+                  )}`
+                : 'Sin umbral de envío gratis configurado'}
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={() => {
+            setTempShippingCost(tenant.commerce.flatShippingCost.toString());
+            setTempFreeThreshold(
+              tenant.commerce.freeShippingThreshold?.toString() || ''
+            );
+            setShowShippingModal(true);
+          }}
+          className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-semibold text-xs border border-zinc-700 transition"
+        >
+          <Settings2 className="h-3.5 w-3.5 text-blue-400" />
+          <span>Configurar Envío</span>
+        </button>
       </div>
 
       {importNotice && (
@@ -138,7 +241,7 @@ export const ProductsTab: React.FC = () => {
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="rounded-xl bg-zinc-900 border border-zinc-800 px-3.5 py-2.5 text-xs text-zinc-300 outline-none"
+          className="rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2.5 text-xs text-zinc-200 outline-none focus:border-zinc-700"
         >
           <option value="all">Todas las categorías ({tenant.items.length})</option>
           {tenant.categories.map((c) => (
@@ -149,134 +252,212 @@ export const ProductsTab: React.FC = () => {
         </select>
       </div>
 
-      {/* Products List (Mobile Touch Cards) */}
-      <div className="grid grid-cols-1 gap-3">
-        {filteredItems.map((item) => (
-          <div
-            key={item.id}
-            className={`flex flex-col sm:flex-row sm:items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition ${
-              item.inStock
-                ? 'bg-zinc-900 border-zinc-800'
-                : 'bg-zinc-950/60 border-zinc-900 opacity-60'
-            }`}
-          >
-            <div className="flex items-start gap-3.5 min-w-0">
-              <img
-                src={item.images[0]}
-                alt={item.title}
-                className="h-16 w-16 sm:h-14 sm:w-14 rounded-xl object-cover shrink-0 border border-zinc-800 bg-zinc-800"
-              />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-sm font-bold text-white truncate">
-                    {item.title}
-                  </h3>
-                  {item.badge && (
-                    <span className="shrink-0 px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold">
-                      {item.badge}
+      {/* Products Table/Cards */}
+      <div className="space-y-2">
+        {filteredItems.length === 0 ? (
+          <div className="p-12 text-center text-zinc-500 text-xs bg-zinc-900/40 rounded-2xl border border-zinc-850">
+            No se encontraron productos que coincidan con la búsqueda.
+          </div>
+        ) : (
+          filteredItems.map((item) => (
+            <div
+              key={item.id}
+              className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-2xl border transition ${
+                item.inStock
+                  ? 'bg-zinc-900/60 border-zinc-800/80 hover:border-zinc-700'
+                  : 'bg-zinc-950/40 border-zinc-900 opacity-60'
+              }`}
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <img
+                  src={item.images[0]}
+                  alt={item.title}
+                  className="h-12 w-12 rounded-xl object-cover shrink-0 bg-zinc-950"
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-xs text-white truncate">
+                      {item.title}
+                    </h3>
+                    {item.badge && (
+                      <span className="shrink-0 px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-400 font-bold text-[9px]">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-zinc-400 truncate mt-0.5">
+                    {item.description}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="font-bold text-emerald-400 text-xs">
+                      {formatARS(item.price, sym)}
                     </span>
-                  )}
-                </div>
-                <p className="text-xs text-zinc-400 line-clamp-1 mt-0.5">
-                  {item.description}
-                </p>
-
-                <div className="flex items-baseline gap-2 mt-1.5 text-xs">
-                  <span className="font-extrabold text-emerald-400 text-sm">
-                    {sym}
-                    {item.price.toLocaleString('es-AR')}
-                  </span>
-                  {item.compareAtPlatformPrice && (
-                    <span className="text-[11px] text-zinc-500 line-through">
-                      MeLi: {sym}
-                      {item.compareAtPlatformPrice.toLocaleString('es-AR')}
-                    </span>
-                  )}
+                    {item.compareAtPlatformPrice && (
+                      <span className="text-[10px] text-zinc-500 line-through">
+                        MeLi: {formatARS(item.compareAtPlatformPrice, sym)}
+                      </span>
+                    )}
+                    {item.variants && item.variants.length > 0 && (
+                      <span className="text-[10px] text-zinc-500">
+                        · {item.variants.length} variante(s)
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Controls */}
-            <div className="flex items-center justify-between sm:justify-end gap-3 pt-3 sm:pt-0 mt-3 sm:mt-0 border-t sm:border-t-0 border-zinc-800/80">
-              {/* Stock Toggle Button */}
-              <button
-                type="button"
-                onClick={() => toggleProductStock(item.id)}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition ${
-                  item.inStock
-                    ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/25'
-                    : 'bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                {item.inStock ? (
-                  <>
-                    <CheckCircle2 className="h-3.5 w-3.5" />
-                    <span>Disponible</span>
-                  </>
-                ) : (
-                  <>
-                    <XCircle className="h-3.5 w-3.5" />
-                    <span>Sin Stock</span>
-                  </>
-                )}
-              </button>
-
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-end gap-2 shrink-0 pt-2 sm:pt-0 border-t sm:border-0 border-zinc-850">
                 <button
-                  type="button"
-                  onClick={() => setEditingItem(item)}
-                  className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition"
-                  title="Editar"
+                  onClick={() => toggleProductStock(item.id)}
+                  className={`px-2.5 py-1.5 rounded-xl text-[11px] font-bold transition flex items-center gap-1.5 ${
+                    item.inStock
+                      ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                      : 'bg-zinc-800 text-zinc-400 border border-zinc-700'
+                  }`}
+                  title="Cambiar estado de stock"
                 >
-                  <Edit2 className="h-4 w-4" />
+                  {item.inStock ? (
+                    <>
+                      <CheckCircle2 className="h-3 w-3" /> Disponible
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="h-3 w-3" /> Sin Stock
+                    </>
+                  )}
                 </button>
+
                 <button
-                  type="button"
+                  onClick={() => setEditingItem(item)}
+                  className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700 transition"
+                  title="Editar producto"
+                >
+                  <Edit2 className="h-3.5 w-3.5" />
+                </button>
+
+                <button
                   onClick={() => {
                     if (confirm(`¿Eliminar "${item.title}"?`)) {
                       deleteProduct(item.id);
                     }
                   }}
-                  className="p-2 rounded-xl bg-zinc-800 hover:bg-red-500/20 text-zinc-400 hover:text-red-400 transition"
-                  title="Eliminar"
+                  className="p-2 rounded-xl bg-zinc-800 hover:bg-red-950 text-zinc-400 hover:text-red-400 border border-zinc-700 transition"
+                  title="Eliminar producto"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-3.5 w-3.5" />
                 </button>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
-      {/* CSV Import Modal */}
-      {showCsvModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="w-full max-w-lg rounded-3xl bg-zinc-900 border border-zinc-800 p-6 space-y-4 text-zinc-100 shadow-2xl">
-            <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-              <h3 className="font-bold text-base flex items-center gap-2">
-                <FileSpreadsheet className="h-5 w-5 text-emerald-400" />
-                Importar Productos con Excel o CSV
+      {/* Quick Shipping Modal */}
+      {showShippingModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+          <form
+            onSubmit={handleSaveShipping}
+            className="w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 p-5 space-y-4 text-xs shadow-2xl"
+          >
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                <Truck className="h-4 w-4 text-blue-400" />
+                Configurar Tarifas de Envío
               </h3>
               <button
-                onClick={() => setShowCsvModal(false)}
-                className="text-zinc-400 hover:text-white"
+                type="button"
+                onClick={() => setShowShippingModal(false)}
+                className="rounded-full p-1 text-zinc-400 hover:text-white"
               >
-                ✕
+                <X className="h-4 w-4" />
               </button>
             </div>
 
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Subí un archivo separado por comas (.csv) o pegá el contenido de tu planilla. Podés descargar la plantilla modelo para completarla en Excel o Google Sheets.
+            <div>
+              <label className="block font-semibold mb-1 text-zinc-300">
+                Costo de Envío Fijo ($)
+              </label>
+              <input
+                type="number"
+                min="0"
+                value={tempShippingCost}
+                onChange={(e) => setTempShippingCost(e.target.value)}
+                placeholder="Ej: 4900 (o 0 para gratis)"
+                className="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-3.5 py-2.5 text-sm font-bold text-emerald-400 outline-none focus:border-blue-500"
+              />
+              <p className="text-[11px] text-zinc-400 mt-1">
+                Es el costo que se cobra en checkout al elegir "Envío a Domicilio".
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1 text-zinc-300">
+                Monto Mínimo para Envío Gratis ($)
+              </label>
+              <input
+                type="number"
+                min="0"
+                value={tempFreeThreshold}
+                onChange={(e) => setTempFreeThreshold(e.target.value)}
+                placeholder="Ej: 38000 (Dejar vacío si no aplica)"
+                className="w-full rounded-xl bg-zinc-950 border border-zinc-800 px-3.5 py-2.5 text-sm font-bold text-zinc-200 outline-none focus:border-blue-500"
+              />
+              <p className="text-[11px] text-zinc-400 mt-1">
+                Si el carrito supera este valor, el envío pasa a ser $0 automáticamente.
+              </p>
+            </div>
+
+            <div className="flex justify-end gap-2 pt-2 border-t border-zinc-800">
+              <button
+                type="button"
+                onClick={() => setShowShippingModal(false)}
+                className="px-4 py-2 rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-300 font-semibold"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold shadow"
+              >
+                Guardar Tarifas
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* CSV Import Modal */}
+      {showCsvModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+          <div className="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 p-5 space-y-4 text-xs shadow-2xl">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+              <h3 className="font-bold text-sm text-white flex items-center gap-2">
+                <FileSpreadsheet className="h-4 w-4 text-emerald-400" />
+                Importar Productos masivamente (Excel / CSV)
+              </h3>
+              <button
+                onClick={() => setShowCsvModal(false)}
+                className="rounded-full p-1 text-zinc-400 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <p className="text-zinc-400 leading-relaxed text-[11px]">
+              Pegá el contenido copiado de un Excel o cargá un archivo .csv con
+              las columnas estándar.
             </p>
 
-            <div className="flex gap-2">
+            <div className="flex items-center justify-between gap-2">
               <button
+                type="button"
                 onClick={handleDownloadTemplate}
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-emerald-400 transition"
+                className="inline-flex items-center gap-1.5 text-amber-400 hover:underline text-[11px] font-semibold"
               >
                 <Download className="h-3.5 w-3.5" />
-                <span>Descargar Plantilla Excel/CSV</span>
+                Descargar plantilla de ejemplo .csv
               </button>
+
               <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition cursor-pointer">
                 <span>Seleccionar Archivo...</span>
                 <input

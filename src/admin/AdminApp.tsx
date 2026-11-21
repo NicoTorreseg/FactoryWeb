@@ -13,6 +13,10 @@ import {
   FileJson,
   ArrowLeft,
   Eye,
+  UploadCloud,
+  CheckCircle2,
+  Loader2,
+  Sparkles,
 } from 'lucide-react';
 
 interface AdminAppProps {
@@ -21,7 +25,16 @@ interface AdminAppProps {
 }
 
 const AdminLayout: React.FC<{ onExitAdmin: () => void }> = ({ onExitAdmin }) => {
-  const { tenant, activeTab, setActiveTab } = useAdmin();
+  const {
+    tenant,
+    activeTab,
+    setActiveTab,
+    hasUnsavedChanges,
+    isPublishing,
+    lastPublishedAt,
+    publishNotice,
+    publishToCloud,
+  } = useAdmin();
 
   const tabs = [
     { id: 'products', label: 'Productos & Precios', icon: Package },
@@ -52,24 +65,74 @@ const AdminLayout: React.FC<{ onExitAdmin: () => void }> = ({ onExitAdmin }) => 
                   Panel de Control
                 </span>
               </div>
-              <p className="text-[11px] text-zinc-400">
-                Cambios guardados en vivo
-              </p>
+              <div className="flex items-center gap-1.5 text-[11px] mt-0.5">
+                {hasUnsavedChanges ? (
+                  <span className="text-amber-400 font-medium flex items-center gap-1">
+                    <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+                    Cambios locales sin publicar
+                  </span>
+                ) : (
+                  <span className="text-emerald-400 font-medium flex items-center gap-1">
+                    <CheckCircle2 className="h-3 w-3" />
+                    {lastPublishedAt
+                      ? `Publicado a las ${lastPublishedAt}`
+                      : 'Sincronizado en la nube'}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Action: Publicar Cambios en Vivo */}
+            <button
+              onClick={() => publishToCloud()}
+              disabled={isPublishing}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold transition shadow-md ${
+                hasUnsavedChanges
+                  ? 'bg-emerald-600 hover:bg-emerald-500 text-white animate-pulse'
+                  : 'bg-zinc-850 hover:bg-zinc-800 text-zinc-200 border border-zinc-750'
+              }`}
+              title="Publicar cambios para que se vean en celulares y clientes"
+            >
+              {isPublishing ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  <span>Publicando...</span>
+                </>
+              ) : (
+                <>
+                  <UploadCloud className="h-3.5 w-3.5 text-emerald-400" />
+                  <span>
+                    {hasUnsavedChanges
+                      ? 'Publicar Cambios'
+                      : 'Sincronizar Nube'}
+                  </span>
+                </>
+              )}
+            </button>
+
             <a
               href={`/d/${tenant.slug}?capture=1`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold text-zinc-200 transition"
             >
-              <Eye className="h-3.5 w-3.5 text-emerald-400" />
-              <span className="hidden sm:inline">Ver Tienda en Vivo</span>
+              <Eye className="h-3.5 w-3.5 text-blue-400" />
+              <span className="hidden sm:inline">Ver Tienda</span>
             </a>
           </div>
         </div>
+
+        {/* Global Toast / Notice */}
+        {publishNotice && (
+          <div className="mx-auto max-w-6xl mt-2 p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center justify-between transition-all">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-emerald-400" />
+              <span>{publishNotice}</span>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Tab Navigator (Desktop horizontal / Mobile sticky bottom) */}

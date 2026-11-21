@@ -14,6 +14,10 @@ interface AdminContextType {
   importProducts: (newItems: CatalogItem[], mode: 'replace' | 'append') => void;
   resetToOriginal: () => void;
   hasUnsavedChanges: boolean;
+  isPublishing: boolean;
+  lastPublishedAt: string | null;
+  publishNotice: string | null;
+  publishToCloud: () => Promise<boolean>;
 }
 
 const AdminContext = createContext<AdminContextType | null>(null);
@@ -22,12 +26,43 @@ export const AdminProvider: React.FC<{
   initialTenant: TenantConfig;
   children: React.ReactNode;
 }> = ({ initialTenant, children }) => {
-  const [activeTab, setActiveTab] = useState<'products' | 'commercial' | 'brand' | 'sync'>('products');
+  const [activeTab, setActiveTab] = useState<
+    'products' | 'commercial' | 'brand' | 'sync'
+  >('products');
   const [tenant, setTenant] = useState<TenantConfig>(() => {
     return defaultStorageAdapter.load(initialTenant.slug, initialTenant);
   });
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [lastPublishedAt, setLastPublishedAt] = useState<string | null>(null);
+  const [publishNotice, setPublishNotice] = useState<string | null>(null);
 
+  // Auto-fetch latest cloud version on mount if available
+  useEffect(() => {
+    let mounted = true;
+    fetch(`/api/tenant?slug=${encodeURIComponent(initialTenant.slug)}`)
+      .then((res) => {
+        if (res.ok) return res.json();
+        return null;
+      })
+      .then((cloudTenant) => {
+        if (mounted && cloudTenant && cloudTenant.slug === initialTenant.slug) {
+          // If cloud data is present and user hasn't made unsaved local edits yet
+          if (!hasUnsavedChanges) {
+            setTenant(cloudTenant);
+            defaultStorageAdapter.save(cloudTenant);
+          }
+        }
+      })
+      .catch(() => {
+        // Silently ignore if running strictly local
+      });
+    return () => {
+      mounted = false;
+    };
+  }, [initialTenant.slug]);
+
+  // Persist locally in localStorage on every edit
   useEffect(() => {
     defaultStorageAdapter.save(tenant);
   }, [tenant]);
@@ -38,6 +73,42 @@ export const AdminProvider: React.FC<{
       setHasUnsavedChanges(true);
       return next;
     });
+  };
+
+  const publishToCloud = async (): Promise<boolean> => {
+    setIsPublishing(true);
+    setPublishNotice(null);
+    try {
+      const res = await fetch('/api/tenant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: tenant.slug, tenant }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`);
+      }
+
+      defaultStorageAdapter.save(tenant);
+      setHasUnsavedChanges(false);
+      const timeStr = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      setLastPublishedAt(timeStr);
+      setPublishNotice('¡Cambios publicados en vivo para todos los celulares y PCs!');
+      setTimeout(() => setPublishNotice(null), 4000);
+      return true;
+    } catch (err: any) {
+      console.warn('Could not reach cloud edge API, saved locally:', err.message);
+      // Still saved in localStorage
+      defaultStorageAdapter.save(tenant);
+      setPublishNotice('Cambios guardados localmente. Al subir a Git o conectar KV se sincronizarán en la nube.');
+      setTimeout(() => setPublishNotice(null), 5000);
+      return false;
+    } finally {
+      setIsPublishing(false);
+    }
   };
 
   const updateProduct = (product: CatalogItem) => {
@@ -76,7 +147,10 @@ export const AdminProvider: React.FC<{
     }));
   };
 
-  const importProducts = (newItems: CatalogItem[], mode: 'replace' | 'append') => {
+  const importProducts = (
+    newItems: CatalogItem[],
+    mode: 'replace' | 'append'
+  ) => {
     updateTenant((prev) => ({
       ...prev,
       items: mode === 'replace' ? newItems : [...newItems, ...prev.items],
@@ -103,6 +177,10 @@ export const AdminProvider: React.FC<{
         importProducts,
         resetToOriginal,
         hasUnsavedChanges,
+        isPublishing,
+        lastPublishedAt,
+        publishNotice,
+        publishToCloud,
       }}
     >
       {children}

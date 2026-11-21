@@ -78,7 +78,7 @@ export async function onRequestPost(context: {
       new URL(request.url).origin ||
       'https://aventotech.pages.dev';
 
-    // Format items for Mercado Pago API
+    // Format items for Mercado Pago API (Only actual catalog products)
     const mpItems = items.map((item, idx) => ({
       id: item.id || `item-${idx + 1}`,
       title: item.title,
@@ -89,21 +89,16 @@ export async function onRequestPost(context: {
       picture_url: item.picture_url,
     }));
 
-    // Add shipping as line item if greater than 0
-    if (shippingCost && shippingCost > 0) {
-      mpItems.push({
-        id: 'envio-domicilio',
-        title: 'Costo de Envío a Domicilio',
-        description: 'Despacho directo',
-        quantity: 1,
-        currency_id: 'ARS',
-        unit_price: Math.round(Number(shippingCost)),
-        picture_url: undefined,
-      });
-    }
+    const hasShipping = Boolean(shippingCost && Number(shippingCost) > 0);
 
-    const preferencePayload = {
+    const preferencePayload: Record<string, any> = {
       items: mpItems,
+      shipments: hasShipping
+        ? {
+            cost: Math.round(Number(shippingCost)),
+            mode: 'not_specified',
+          }
+        : undefined,
       payer: {
         name: payer?.name || 'Cliente Web',
         address: payer?.address
